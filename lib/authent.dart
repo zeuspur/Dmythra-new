@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dmythra2/model/help_model.dart';
 import 'package:dmythra2/model/user_model.dart';
 import 'package:dmythra2/model/sponsor_model.dart';
 import 'package:dmythra2/user_forgetpassword.dart';
@@ -257,7 +258,7 @@ class BackendServices {
     postPic = await pickPostPhoto(context);
   }
 
-  uploadPostPhoto(File postPhoto,String postName) async {
+  uploadPostPhoto(File postPhoto, String postName) async {
     await storeImagetoStorge(
             'Users posts/${firebaseAuth.currentUser!.uid}/Post pics/$postName/',
             postPhoto)
@@ -269,10 +270,11 @@ class BackendServices {
           .doc(firebaseAuth.currentUser!.uid)
           .collection('posts')
           .doc(postModel.postid);
-     await docRef.update({'postPic': value});
-     
-     DocumentReference publicDocRef = firebaseFirestore.collection('users posts').doc(postModel.postid);
-    await publicDocRef.update({'postPic': value});
+      await docRef.update({'postPic': value});
+
+      DocumentReference publicDocRef =
+          firebaseFirestore.collection('users posts').doc(postModel.postid);
+      await publicDocRef.update({'postPic': value});
     });
     _postModel = postModel;
     print('Pic uploaded successfully');
@@ -282,21 +284,94 @@ class BackendServices {
     String postPic,
     String postBio,
   ) async {
-    final docID = firebaseFirestore
+    String postID = firebaseFirestore
         .collection('users')
-        .doc(firebaseAuth.currentUser!.uid);
-     final userDocID =   docID.collection('posts')
-        .doc(docID.id);
-    final postsDocId = firebaseFirestore.collection('users posts').doc(docID.id);
+        .doc(firebaseAuth.currentUser!.uid)
+        .collection('posts')
+        .doc()
+        .id;
+
     _postModel = PostModel(
-      postid: docID.id,
+        postid: postID,
         postPic: postPic,
         postBio: postBio,
         userid: firebaseAuth.currentUser!.uid);
 
+    await firebaseFirestore
+        .collection('users')
+        .doc(firebaseAuth.currentUser!.uid)
+        .collection('posts')
+        .doc(postID)
+        .set(_postModel!.toMap(postID));
+    await firebaseFirestore
+        .collection('users posts')
+        .doc(postID)
+        .set(_postModel!.toMap(postID));
+  }
 
-  await  userDocID.set(_postModel!.toMap(docID.id));
+  //------------------------HELP--------------------------------------------
 
-   await postsDocId.set(_postModel!.toMap(postsDocId.id));
+  HelpModel? _helpModel;
+  HelpModel get helpModel => _helpModel!;
+
+  Future<void> saveHelp(
+    String collectionName,
+    String helpType,
+    int helpNumber,
+  ) async {
+    String helpID = firebaseFirestore
+        .collection('users')
+        .doc(firebaseAuth.currentUser!.uid)
+        .collection(collectionName)
+        .doc()
+        .id;
+
+    _helpModel = HelpModel(
+        helpid: helpID,
+        helpType: helpType,
+        helpNumber: helpNumber,
+        userid: firebaseAuth.currentUser!.uid);
+
+    await firebaseFirestore
+        .collection('users')
+        .doc(firebaseAuth.currentUser!.uid)
+        .collection(collectionName)
+        .doc(helpID)
+        .set(_helpModel!.toMap(helpID));
+    await firebaseFirestore
+        .collection(collectionName)
+        .doc(helpID)
+        .set(_helpModel!.toMap(helpID));
+  }
+
+  //--------------------FETCH SPONSOR-------------------------
+  List<SponsorModel> sponsorsList = [];
+  SponsorModel? sponsors;
+  Future<void> fetchSponsor() async {
+    try {
+      sponsorsList.clear();
+      CollectionReference sponsorsRef =
+          firebaseFirestore.collection('sponsors');
+      QuerySnapshot sponsorSnapshot = await sponsorsRef.get();
+
+      for (var doc in sponsorSnapshot.docs) {
+        String sponsorid = doc['sponsorid'];
+        String sponsorname = doc['sponsorname'];
+        String dob = doc['dob'];
+        String email = doc['email'];
+        int aadhar = doc['aadhar'];
+
+        sponsors = SponsorModel(
+            sponsorid: sponsorid,
+            sponsorname: sponsorname,
+            dob: dob,
+            email: email,
+            aadhar: aadhar);
+        sponsorsList.add(sponsors!);
+
+      }
+    } catch (e) {
+      print('Sponsors fetching failed : $e');
+    }
   }
 }

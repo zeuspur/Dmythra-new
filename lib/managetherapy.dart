@@ -7,6 +7,7 @@ class ManageTherapy extends StatefulWidget {
 }
 
 class _ManageTherapyState extends State<ManageTherapy> {
+
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -51,6 +52,44 @@ class _ManageTherapyState extends State<ManageTherapy> {
                 height: 150,
                 width: double.infinity,
               ),
+              // Radio(
+              //   activeColor: Colors.white,
+              //   value: 'GooglePay',
+              //   groupValue: 'selectedMode',
+              //   onChanged: (value) {
+              //     setState(() {
+              //       'selectedMode' = value!;
+              //     });
+              //   },
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.only(right: 250.0),
+              //   child: Container(
+              //     child: Text(
+              //       'Category',
+              //       style: TextStyle(fontSize: 20),
+              //     ),
+              //   ),
+              // ),
+              // SizedBox(height: 3,),
+              // Padding(
+              //   padding: const EdgeInsets.only(right: 11.0),
+              //   child: Container(
+              //     width: 290,
+              //     height: 50,
+              //     decoration: BoxDecoration(
+              //         borderRadius: BorderRadius.circular(30),
+              //         color: Colors.lightBlue.shade50),
+              //     child: TextField(
+              //       decoration: InputDecoration(
+              //         hintText: 'Enter the Category',
+              //         border: InputBorder.none,
+              //         contentPadding:
+              //         EdgeInsets.only(left: 30.0),
+              //       ),
+              //     ),
+              //   ),
+              // ),
               Padding(
                 padding: const EdgeInsets.only(right: 250.0),
                 child: Container(

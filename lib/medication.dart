@@ -87,29 +87,6 @@ class _MedicationState extends State<Medication> {
       SizedBox(
         height: 10,
       ),
-      Padding(
-        padding: const EdgeInsets.only(right: 240.0),
-        child: Container(
-          child: Text(
-            'Date',
-            style: TextStyle(fontSize: 20),
-          ),
-        ),
-      ),
-      SizedBox(
-        height: 1,
-      ),
-      Container(
-        width: 290,
-        height: 50,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
-            color: Colors.lightBlue.shade50),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 70,top: 10),
-          child: Text('20/12/2023',style: TextStyle(fontSize: 20),),
-        ),
-      ),
     ]
     )),);
   }

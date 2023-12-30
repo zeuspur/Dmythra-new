@@ -113,8 +113,9 @@ class _ActivityPostState extends State<ActivityPost> {
               onTap: ()async {
                await backendServices
                     .savePost(backendServices.postPic!.path, bioController.text);
-               await Future.delayed(Duration(seconds: 5));
+
                backendServices.uploadPostPhoto(backendServices.postPic!,bioController.text);
+               Navigator.of(context).pop();
 
               },
               child: Container(

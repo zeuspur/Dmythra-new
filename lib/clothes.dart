@@ -1,3 +1,4 @@
+import 'package:dmythra2/authent.dart';
 import 'package:flutter/material.dart';
 class Clothes extends StatefulWidget {
   const Clothes({super.key});
@@ -7,6 +8,9 @@ class Clothes extends StatefulWidget {
 }
 
 class _ClothesState extends State<Clothes> {
+  TextEditingController helptypeController = TextEditingController();
+  TextEditingController helpNumberController = TextEditingController();
+  BackendServices backendServices = BackendServices();
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -61,7 +65,8 @@ class _ClothesState extends State<Clothes> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
                       color: Colors.lightBlue.shade50),
-                  child: TextField(
+                  child: TextFormField(
+                    controller: helptypeController,
                     decoration: InputDecoration(
                       hintText: 'What do you need?',
                       border: InputBorder.none,
@@ -90,7 +95,8 @@ class _ClothesState extends State<Clothes> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
                       color: Colors.lightBlue.shade50),
-                  child: TextField(
+                  child: TextFormField(
+                    controller: helpNumberController,
                     decoration: InputDecoration(
                       hintText: 'Enter your phone no',
                       border: InputBorder.none,
@@ -104,24 +110,32 @@ class _ClothesState extends State<Clothes> {
               Positioned(
                 bottom: 100.0,
                 left: 80.0,
-                child: Container(
-                  width: 200.0,
-                  height: 50.0,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 12.0, left: 74.0),
-                    child: Text(
-                      'Submit',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w100,
-                          fontSize: 20),
+                child: InkWell(
+                  onTap: (){
+                    backendServices.saveHelp(
+                        'Clothes Help',
+                        helptypeController.text,
+                        int.parse(helpNumberController.text)).then((value) => Navigator.of(context).pop());
+                  },
+                  child: Container(
+                    width: 200.0,
+                    height: 50.0,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 12.0, left: 74.0),
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w100,
+                            fontSize: 20),
+                      ),
                     ),
-                  ),
-                  decoration: BoxDecoration(
-                    // Define your desired decoration here
-                    borderRadius: BorderRadius.circular(
-                        30.0),
-                    color: Colors.blue.shade900,
+                    decoration: BoxDecoration(
+                      // Define your desired decoration here
+                      borderRadius: BorderRadius.circular(
+                          30.0),
+                      color: Colors.blue.shade900,
+                    ),
                   ),
                 ),
               ),
