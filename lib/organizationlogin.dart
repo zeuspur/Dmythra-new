@@ -1,3 +1,4 @@
+import 'package:dmythra2/authent.dart';
 import 'package:dmythra2/orghome.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,9 @@ class OrganizationLogin extends StatefulWidget {
 }
 
 class _OrganizationLoginState extends State<OrganizationLogin> {
+  TextEditingController username = TextEditingController();
+  TextEditingController password = TextEditingController();
+  BackendServices backendServices = BackendServices();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +72,9 @@ class _OrganizationLoginState extends State<OrganizationLogin> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         color: Colors.lightBlue.shade50),
-                    child: TextField(),
+                    child: TextFormField(
+                      controller: username,
+                    ),
                   ),
                   SizedBox(
                     height: 10,
@@ -93,7 +99,9 @@ class _OrganizationLoginState extends State<OrganizationLogin> {
                             color: Colors.lightBlue.shade50),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: TextField(),
+                          child: TextFormField(
+                            controller: password,
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -101,14 +109,15 @@ class _OrganizationLoginState extends State<OrganizationLogin> {
                       ),
                     ],
                   ),
-
                   SizedBox(
                     height: 40,
                   ),
                   Center(
-                    child: InkWell(onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => OrganizationHome(),),);
-                    },
+                    child: InkWell(
+                      onTap: () {
+                        backendServices.orgLogin(
+                            username.text, password.text, context);
+                      },
                       child: Container(
                         alignment: Alignment.center,
                         height: 50,
@@ -124,7 +133,6 @@ class _OrganizationLoginState extends State<OrganizationLogin> {
                       ),
                     ),
                   ),
-
                 ],
               )
             ],

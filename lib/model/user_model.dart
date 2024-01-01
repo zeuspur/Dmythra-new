@@ -6,6 +6,7 @@ class UserModel {
   String dob;
   String email;
   int aadhar;
+  int phone;
 
   UserModel({
     required this.userid,
@@ -15,6 +16,7 @@ class UserModel {
     required this.dob,
     required this.email,
     required this.aadhar,
+    required this.phone,
   });
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
@@ -26,6 +28,7 @@ class UserModel {
       dob: map['dob'],
       email: map['email'],
       aadhar: map['aadhar'],
+      phone: map['phone'],
     );
   }
 
@@ -39,6 +42,7 @@ class UserModel {
       'dob':dob,
       'email':email,
       'aadhar':aadhar,
+      'phone':phone,
     };
   }
 }

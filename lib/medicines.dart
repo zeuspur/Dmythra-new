@@ -1,4 +1,6 @@
+import 'package:dmythra2/authent.dart';
 import 'package:flutter/material.dart';
+
 class Medicines extends StatefulWidget {
   const Medicines({super.key});
 
@@ -7,9 +9,13 @@ class Medicines extends StatefulWidget {
 }
 
 class _MedicinesState extends State<Medicines> {
+  TextEditingController prescriptionController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+  BackendServices backendServices = BackendServices();
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         automaticallyImplyLeading: true,
@@ -26,9 +32,9 @@ class _MedicinesState extends State<Medicines> {
         height: double.infinity,
         decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/medicines.png'),
-              fit: BoxFit.fill,
-            )),
+          image: AssetImage('assets/medicines.png'),
+          fit: BoxFit.fill,
+        )),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -65,7 +71,16 @@ class _MedicinesState extends State<Medicines> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
                       color: Colors.lightBlue.shade50),
-                  child: TextField(
+                  child: TextFormField(
+                    onTap: () {
+                      backendServices.selectPostPic(context).whenComplete(() {
+                        setState(() {
+                          prescriptionController.text =
+                              backendServices.postPic!.path;
+                        });
+                      });
+                    },
+                    controller: prescriptionController,
                     decoration: InputDecoration(
                       hintText: 'What do you need?',
                       border: InputBorder.none,
@@ -120,7 +135,8 @@ class _MedicinesState extends State<Medicines> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
                       color: Colors.lightBlue.shade50),
-                  child: TextField(
+                  child: TextFormField(
+                    controller: phoneController,
                     decoration: InputDecoration(
                       hintText: 'Enter your phone no',
                       border: InputBorder.none,
@@ -129,7 +145,9 @@ class _MedicinesState extends State<Medicines> {
                   ),
                 ),
               ),
-              SizedBox(height: 6,),
+              SizedBox(
+                height: 6,
+              ),
               Padding(
                 padding: const EdgeInsets.only(right: 190.0),
                 child: Container(
@@ -150,7 +168,8 @@ class _MedicinesState extends State<Medicines> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
                       color: Colors.lightBlue.shade50),
-                  child: TextField(
+                  child: TextFormField(
+                    controller: descriptionController,
                     decoration: InputDecoration(
                       hintText: 'What do you want?',
                       border: InputBorder.none,
@@ -165,23 +184,33 @@ class _MedicinesState extends State<Medicines> {
               Positioned(
                 bottom: 100.0,
                 left: 80.0,
-                child: Container(
-                  width: 200.0,
-                  height: 50.0,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 12.0, left: 74.0),
-                    child: Text(
-                      'Submit',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w100,
-                          fontSize: 20),
+                child: InkWell(
+                  onTap: ()async {
+                 await   backendServices.saveMedicine(
+                        prescriptionController.text,
+                        int.parse(phoneController.text),
+                        descriptionController.text);
+                 backendServices.uploadPrescription(backendServices.postPic!, descriptionController.text);
+                 Navigator.of(context).pop();
+                  },
+                  child: Container(
+                    width: 200.0,
+                    height: 50.0,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 12.0, left: 74.0),
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w100,
+                            fontSize: 20),
+                      ),
                     ),
-                  ),
-                  decoration: BoxDecoration(
-                    // Define your desired decoration here
-                    borderRadius: BorderRadius.circular(30.0),
-                    color: Colors.blue.shade900,
+                    decoration: BoxDecoration(
+                      // Define your desired decoration here
+                      borderRadius: BorderRadius.circular(30.0),
+                      color: Colors.blue.shade900,
+                    ),
                   ),
                 ),
               ),

@@ -115,7 +115,7 @@ class _Organization_ViewActivitiesState
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.only(left: 25),
-                                        child: IconButton(onPressed: (){}, icon: Icon(Icons.favorite)),
+                                        // child: IconButton(onPressed: (){}, icon: Icon(Icons.favorite)),
                                       )
                                       // ElevatedButton(
                                       //     onPressed: () {},

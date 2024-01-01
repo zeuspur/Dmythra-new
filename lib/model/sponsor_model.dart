@@ -2,8 +2,9 @@ class SponsorModel {
   String sponsorid;
   String sponsorname;
   String dob;
-  String email;
+  String  email;
   int aadhar;
+  int phone;
 
   SponsorModel({
     required this.sponsorid,
@@ -11,6 +12,7 @@ class SponsorModel {
     required this.dob,
     required this.email,
     required this.aadhar,
+    required this.phone,
   });
 
   factory SponsorModel.fromMap(Map<String, dynamic> map) {
@@ -20,6 +22,7 @@ class SponsorModel {
       dob: map['dob'],
       email: map['email'],
       aadhar: map['aadhar'],
+      phone: map['phone'],
     );
   }
 
@@ -31,6 +34,7 @@ class SponsorModel {
       'dob':dob,
       'email':email,
       'aadhar':aadhar,
+      'phone' :phone,
     };
   }
 }

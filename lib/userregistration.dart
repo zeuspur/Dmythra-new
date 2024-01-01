@@ -18,6 +18,7 @@ class _UserRegisterationState extends State<UserRegisteration> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController dobController = TextEditingController();
   TextEditingController aadharController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
   final signupkey = GlobalKey<FormState>();
 
   clearfield(){udidController.clear();
@@ -27,6 +28,7 @@ class _UserRegisterationState extends State<UserRegisteration> {
   passwordController.clear();
   dobController.clear();
   aadharController.clear();
+  phoneController.clear();
   }
   @override
   Widget build(BuildContext context) {
@@ -275,6 +277,33 @@ class _UserRegisterationState extends State<UserRegisteration> {
                               controller: aadharController,
                             ),
                           ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 158.0),
+                            child: Text(
+                              'Phone no',
+                              style: TextStyle(fontSize: 20),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 3,
+                          ),
+                          Container(
+                            width: 250,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                color: Colors.lightBlue.shade50),
+                            child: TextFormField(
+                              validator: (value) {
+                                if(value==null||value.isEmpty){
+                                  return '*required field';
+                                }else{
+                                  return null;
+                                }
+                              },
+                              controller: phoneController,
+                            ),
+                          ),
                           SizedBox(
                             height: 25,
                           ),
@@ -290,6 +319,7 @@ class _UserRegisterationState extends State<UserRegisteration> {
                                     disabilityController.text,
                                     dobController.text,
                                     int.parse(aadharController.text),
+                                    int.parse(phoneController.text),
                                   ).then((value) => Navigator.of(context).pop()).then((value) => clearfield());
                                 }
                               },

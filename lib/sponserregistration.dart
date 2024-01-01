@@ -16,6 +16,7 @@ class _SponserRegistrationState extends State<SponserRegistration> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController dobController = TextEditingController();
   TextEditingController aadharController = TextEditingController();
+  TextEditingController phoneContoller = TextEditingController();
   final signupkey = GlobalKey<FormState>();
 
   clearfield(){
@@ -23,6 +24,7 @@ class _SponserRegistrationState extends State<SponserRegistration> {
   passwordController.clear();
   dobController.clear();
   aadharController.clear();
+  phoneContoller.clear();
   }
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,7 @@ class _SponserRegistrationState extends State<SponserRegistration> {
             height: double.infinity,
             decoration: BoxDecoration(
                 image: DecorationImage(
-              image: AssetImage('assets/sponsorregisteration.png'),
+              image: AssetImage('assets/spnsr.jpg'),
               fit: BoxFit.cover,
             )),
             child: Center(
@@ -212,6 +214,33 @@ class _SponserRegistrationState extends State<SponserRegistration> {
                               controller: aadharController,
                             ),
                           ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 185.0),
+                            child: Text(
+                              'Phone no',
+                              style: TextStyle(fontSize: 20),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 3,
+                          ),
+                          Container(
+                            width: 280,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                color: Colors.lightBlue.shade50),
+                            child: TextFormField(
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return '*required field';
+                                } else {
+                                  return null;
+                                }
+                              },
+                              controller: phoneContoller,
+                            ),
+                          ),
                           SizedBox(
                             height: 55,
                           ),
@@ -225,7 +254,8 @@ class _SponserRegistrationState extends State<SponserRegistration> {
                                     passwordController.text,
                                     sponsornameController.text,
                                     dobController.text,
-                                    int.parse(aadharController.text)
+                                    int.parse(aadharController.text),
+                                    int.parse(phoneContoller.text),
 
                                   ) .then((value) => Navigator.of(context).pop()).then((value) => clearfield());
                                 }

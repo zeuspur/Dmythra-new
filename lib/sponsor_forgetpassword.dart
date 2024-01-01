@@ -1,3 +1,4 @@
+import 'package:dmythra2/authent.dart';
 import 'package:flutter/material.dart';
 class Sponsor_ForgetPassword extends StatefulWidget {
   const Sponsor_ForgetPassword({super.key});
@@ -7,6 +8,9 @@ class Sponsor_ForgetPassword extends StatefulWidget {
 }
 
 class _Sponsor_ForgetPasswordState extends State<Sponsor_ForgetPassword> {
+  BackendServices backendServices = BackendServices();
+  final passResetKey = GlobalKey<FormState>();
+  TextEditingController passwordResetController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -54,39 +58,56 @@ class _Sponsor_ForgetPasswordState extends State<Sponsor_ForgetPassword> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
                       color: Colors.lightBlue.shade50),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: 'Enter the Email',
-                      border: InputBorder.none,
-                      contentPadding:
-                      EdgeInsets.only(left: 30),
+                  child: Form(
+                    key: passResetKey,
+                    child: TextFormField(
+                      controller: passwordResetController,
+                      validator: (value) {
+                        if(value ==  null || value.isEmpty){
+                          return '* field is required';
+                        }else{
+                          return null;
+                        }
+                      },
+                      decoration: InputDecoration(
+                        hintText: 'Enter the Email',
+                        border: InputBorder.none,
+                        contentPadding:
+                        EdgeInsets.only(left: 30),
+                      ),
                     ),
                   ),
                 ),
               ),
-
               SizedBox(height: 120,),
               Positioned(
                 bottom: 100.0,
                 left: 80.0,
-                child: Container(
-                  width: 200.0,
-                  height: 50.0,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 12.0, left: 74.0),
-                    child: Text(
-                      'Post',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w100,
-                          fontSize: 20),
+                child: InkWell(
+                  onTap: () {
+                    if(passResetKey.currentState!.validate()){
+                      backendServices.sendPasswordResetEmail(passwordResetController.text, context);
+                    }
+                  },
+                  child: Container(
+                    width: 200.0,
+                    height: 50.0,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 12.0, left: 74.0),
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w100,
+                            fontSize: 20),
+                      ),
                     ),
-                  ),
-                  decoration: BoxDecoration(
-                    // Define your desired decoration here
-                    borderRadius: BorderRadius.circular(
-                        30.0),
-                    color: Colors.blue.shade900,
+                    decoration: BoxDecoration(
+                      // Define your desired decoration here
+                      borderRadius: BorderRadius.circular(
+                          30.0),
+                      color: Colors.blue.shade900,
+                    ),
                   ),
                 ),
               ),

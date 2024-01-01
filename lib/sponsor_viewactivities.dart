@@ -112,7 +112,7 @@ class _Sponsor_ViewActivityState extends State<Sponsor_ViewActivity> {
                                       children: [
                                         Padding(
                                           padding: const EdgeInsets.only(left: 25),
-                                          child: IconButton(onPressed: (){}, icon: Icon(Icons.favorite)),
+                                          // child: IconButton(onPressed: (){}, icon: Icon(Icons.favorite)),
                                         )
 
                                       ],

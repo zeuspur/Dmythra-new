@@ -1,4 +1,5 @@
 import 'package:dmythra2/authent.dart';
+import 'package:dmythra2/loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -85,7 +86,8 @@ class _ProfilePageState extends State<ProfilePage> {
                               ]),
                           child: ListTile(
                             title: const Text('Disability'),
-                            subtitle:  Text(backendServices.userModel.disability),
+                            subtitle:
+                                Text(backendServices.userModel.disability),
                             leading: Icon(Icons.wheelchair_pickup_outlined),
                             tileColor: Colors.white,
                           ),
@@ -109,8 +111,8 @@ class _ProfilePageState extends State<ProfilePage> {
                               ]),
                           child: ListTile(
                             title: const Text('UD ID'),
-                            subtitle:  Text(backendServices.userModel.udid),
-                            leading:const Icon(CupertinoIcons.info),
+                            subtitle: Text(backendServices.userModel.udid),
+                            leading: const Icon(CupertinoIcons.info),
                             tileColor: Colors.white,
                           ),
                         ),
@@ -133,7 +135,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               ]),
                           child: ListTile(
                             title: const Text('Email ID'),
-                            subtitle:  Text(backendServices.userModel.email),
+                            subtitle: Text(backendServices.userModel.email),
                             leading: Icon(Icons.email_outlined),
                             tileColor: Colors.white,
                           ),
@@ -156,6 +158,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                               onPressed: () {
+                                Navigator.of(context).pushAndRemoveUntil(
+                                    MaterialPageRoute(
+                                      builder: (context) => const loginpage(),
+                                    ),
+                                    (route) => false);
                                 FirebaseAuth.instance.signOut();
                               },
                               child: const Text(

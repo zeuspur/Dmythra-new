@@ -135,9 +135,9 @@ class _User_SponsorListState extends State<User_SponsorList> {
                                                   Padding(
                                                     padding:
                                                         const EdgeInsets.only(
-                                                            left: 20, top: 10),
+                                                             top: 10),
                                                     child: Text(
-                                                      'Ph:${backendServices.sponsorsList[index].email }',
+                                                      'Ph:${backendServices.sponsorsList[index].phone }',
                                                       style: TextStyle(
                                                           fontSize: 20),
                                                     ),
@@ -147,7 +147,7 @@ class _User_SponsorListState extends State<User_SponsorList> {
                                                         const EdgeInsets.only(
                                                             left: 20, top: 10),
                                                     child: Text(
-                                                      'ID:${backendServices.sponsorsList[index].sponsorid }',
+                                                      'Email:${backendServices.sponsorsList[index].email }',
                                                       style: TextStyle(
                                                           fontSize: 20),
                                                       // style: TextStyle(
@@ -162,7 +162,9 @@ class _User_SponsorListState extends State<User_SponsorList> {
                                                     child: Row(
                                                       children: [
                                                         ElevatedButton(
-                                                          onPressed: () {},
+                                                          onPressed: () {
+                                                        backendServices.callingFunction(backendServices.sponsorsList[index].phone.toString());
+                                                          },
                                                           style: ButtonStyle(
                                                               backgroundColor:
                                                                   MaterialStatePropertyAll(

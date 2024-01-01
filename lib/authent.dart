@@ -3,18 +3,26 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dmythra2/model/help_model.dart';
+import 'package:dmythra2/model/media_model.dart';
+import 'package:dmythra2/model/medicine_model.dart';
 import 'package:dmythra2/model/user_model.dart';
 import 'package:dmythra2/model/sponsor_model.dart';
+import 'package:dmythra2/orghome.dart';
 import 'package:dmythra2/user_forgetpassword.dart';
 import 'package:dmythra2/userhome.dart';
 import 'package:dmythra2/userlogin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:dmythra2/model/user_post_model.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class BackendServices {
+  String orgID = 'dmythra@123';
+  String orgpass = '123456';
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   FirebaseStorage firebaseStorage = FirebaseStorage.instance;
@@ -30,6 +38,7 @@ class BackendServices {
     String dob,
     String email,
     int aadhar,
+    int phone,
   ) async {
     _userModel = UserModel(
       userid: userID,
@@ -39,6 +48,7 @@ class BackendServices {
       dob: dob,
       email: email,
       aadhar: aadhar,
+      phone: phone,
     );
 
     await firebaseFirestore
@@ -55,6 +65,7 @@ class BackendServices {
     String disability,
     String dob,
     int aadhar,
+    int phone,
   ) async {
     try {
       final credential = await firebaseAuth.createUserWithEmailAndPassword(
@@ -71,6 +82,7 @@ class BackendServices {
         dob,
         emailAddress,
         aadhar,
+        phone,
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -139,6 +151,7 @@ class BackendServices {
           dob: snapshot['dob'],
           email: snapshot['email'],
           aadhar: snapshot['aadhar'],
+          phone: snapshot['phone'],
         );
         _uid = userModel.userid;
         print('Fethcing completed _________');
@@ -158,6 +171,7 @@ class BackendServices {
     String dob,
     String email,
     int aadhar,
+    int phone,
   ) async {
     _sponsorModel = SponsorModel(
       sponsorid: sponsorID,
@@ -165,6 +179,7 @@ class BackendServices {
       dob: dob,
       email: email,
       aadhar: aadhar,
+      phone: phone,
     );
 
     await firebaseFirestore
@@ -179,6 +194,7 @@ class BackendServices {
     String sponsorname,
     String dob,
     int aadhar,
+    int phone,
   ) async {
     try {
       final credential = await firebaseAuth.createUserWithEmailAndPassword(
@@ -193,6 +209,7 @@ class BackendServices {
         dob,
         emailAddress,
         aadhar,
+        phone,
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -360,18 +377,203 @@ class BackendServices {
         String dob = doc['dob'];
         String email = doc['email'];
         int aadhar = doc['aadhar'];
+        int phone = doc['phone'];
 
         sponsors = SponsorModel(
-            sponsorid: sponsorid,
-            sponsorname: sponsorname,
-            dob: dob,
-            email: email,
-            aadhar: aadhar);
+          sponsorid: sponsorid,
+          sponsorname: sponsorname,
+          dob: dob,
+          email: email,
+          aadhar: aadhar,
+          phone: phone,
+        );
         sponsorsList.add(sponsors!);
-
       }
     } catch (e) {
       print('Sponsors fetching failed : $e');
+    }
+  }
+
+  //-------------------SAVE / FETCH MEDIA=---------------------------------------------4
+
+  MediaModel? _mediaModel;
+  MediaModel get mediaModel => _mediaModel!;
+  Future<void> saveMedia(
+    String mediaTitle,
+    String mediaType,
+    String mediaLink,
+    String collectionName,
+  ) async {
+    final docs = await firebaseFirestore.collection(collectionName).doc();
+    _mediaModel = MediaModel(
+        mediaid: docs.id,
+        mediaTitle: mediaTitle,
+        mediaType: mediaType,
+        mediaLink: mediaLink);
+    docs.set(_mediaModel!.toMap(docs.id));
+  }
+
+  List<MediaModel> mediaList = [];
+  MediaModel? medias;
+
+  Future<void> fetchMedias(String collectionName) async {
+    try {
+      mediaList.clear();
+      CollectionReference mediaRef =
+          firebaseFirestore.collection(collectionName);
+      QuerySnapshot mediaSnapshot = await mediaRef.get();
+      for (var doc in mediaSnapshot.docs) {
+        String mediaid = doc['mediaid'];
+        String mediaTitle = doc['mediaTitle'];
+        String mediaType = doc['mediaType'];
+        String mediaLink = doc['mediaLink'];
+
+        medias = MediaModel(
+          mediaid: mediaid,
+          mediaTitle: mediaTitle,
+          mediaType: mediaType,
+          mediaLink: mediaLink,
+        );
+        mediaList.add(medias!);
+      }
+    } catch (e) {
+      print('fetch media failed : $e');
+    }
+  }
+
+  void launchYouTubeVideo(String videoId) async {
+    String url = videoId;
+
+    if (!await launchUrl(Uri.parse(url),
+        mode: LaunchMode.externalApplication)) {
+      print('condition true--------------------');
+      throw Exception('Could not launch $url');
+      // await launchUrl(Uri.parse(url),mode: LaunchMode.platformDefault);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  //---------------------------MEDICINE-----------------------------------------
+  MedicineModel? _medicineModel;
+  MedicineModel get medicineModel => _medicineModel!;
+
+  Future<void> saveMedicine(
+    String prescription,
+    int phone,
+    String description,
+  ) async {
+    String medicineID = firebaseFirestore
+        .collection('users')
+        .doc(firebaseAuth.currentUser!.uid)
+        .collection('medicine help')
+        .doc()
+        .id;
+
+    _medicineModel = MedicineModel(
+        medicineid: medicineID,
+        prescription: prescription,
+        phone: phone,
+        description: description,
+        userID: firebaseAuth.currentUser!.uid);
+
+    await firebaseFirestore
+        .collection('users')
+        .doc(firebaseAuth.currentUser!.uid)
+        .collection('medicine help')
+        .doc(medicineID)
+        .set(_medicineModel!.toMap(medicineID));
+
+    await firebaseFirestore
+        .collection('medicine help')
+        .doc(medicineID)
+        .set(_medicineModel!.toMap(medicineID));
+  }
+
+  uploadPrescription(File postPhoto, String postName) async {
+    await storeImagetoStorge(
+            'Users posts/${firebaseAuth.currentUser!.uid}/Prescription pics/$postName/',
+            postPhoto)
+        .then((value) async {
+      medicineModel.prescription = value;
+
+      DocumentReference docRef = firebaseFirestore
+          .collection('users')
+          .doc(firebaseAuth.currentUser!.uid)
+          .collection('medicine help')
+          .doc(medicineModel.medicineid);
+      await docRef.update({'prescription': value});
+
+      DocumentReference publicDocRef = firebaseFirestore
+          .collection('medicine help')
+          .doc(medicineModel.medicineid);
+      await publicDocRef.update({'prescription': value});
+    });
+    _medicineModel = medicineModel;
+    print('Pic uploaded successfully');
+  }
+
+  void callingFunction(String phone) async {
+    FlutterPhoneDirectCaller.callNumber(phone);
+    log('calling $phone');
+  }
+
+  //------------------------------------ORGANIZATION----------------------------
+  void orgLogin(
+    String id,
+    String pass,
+    context,
+  ) {
+    if (id == orgID && pass == orgpass) {
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => OrganizationHome(),
+      ));
+    } else {
+      print('invalid username or email');
+    }
+  }
+
+  List<UserModel> usersList = [];
+  UserModel? users;
+  Future<void> fetchUsers() async {
+    try {
+      usersList.clear();
+      CollectionReference usersRef = firebaseFirestore.collection('users');
+      QuerySnapshot usersSnapshot = await usersRef.get();
+
+      for (var doc in usersSnapshot.docs) {
+        String userid = doc['userid'];
+        String udid = doc['udid'];
+        String username = doc['username'];
+        String disability = doc['disability'];
+        String dob = doc['dob'];
+        String email = doc['email'];
+        int aadhar = doc['aadhar'];
+        int phone = doc['phone'];
+
+        users = UserModel(
+          userid: userid,
+          udid: udid,
+          username: username,
+          disability: disability,
+          dob: dob,
+          email: email,
+          aadhar: aadhar,
+          phone: phone,
+        );
+        usersList.add(users!);
+      }
+    } catch (e) {
+      print('Users fetching failed : $e');
+    }
+  }
+
+  Future<void> deleteUser(String collectionName,String userId) async {
+    try {
+      await FirebaseFirestore.instance.collection(collectionName).doc(userId).delete();
+      print('User deleted successfully');
+    } catch (e) {
+      print('Error deleting user: $e');
     }
   }
 }
