@@ -82,9 +82,11 @@ class _UserRegisterationState extends State<UserRegisteration> {
                             width: 250,
                             height: 50,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
+                                border: Border.all(width: 2,color: Colors.grey),
+                                borderRadius: BorderRadius.circular(10),
                                 color: Colors.lightBlue.shade50),
                             child: TextFormField(
+                              decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
                               validator: (value) {
                                 if(value==null||value.isEmpty){
                                   return '*required field';
@@ -113,9 +115,11 @@ class _UserRegisterationState extends State<UserRegisteration> {
                             width: 250,
                             height: 50,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
+                                border: Border.all(width: 2,color: Colors.grey),
+                                borderRadius: BorderRadius.circular(10),
                                 color: Colors.lightBlue.shade50),
                             child: TextFormField(
+                              decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
                               validator: (value) {
                                 if(value==null||value.isEmpty){
                                   return '*required field';
@@ -143,9 +147,11 @@ class _UserRegisterationState extends State<UserRegisteration> {
                             width: 250,
                             height: 50,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
+                                border: Border.all(width: 2,color: Colors.grey),
+                                borderRadius: BorderRadius.circular(10),
                                 color: Colors.lightBlue.shade50),
                             child: TextFormField(
+                              decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
                               validator: (value) {
                                 if(value==null||value.isEmpty){
                                   return '*required field';
@@ -173,9 +179,11 @@ class _UserRegisterationState extends State<UserRegisteration> {
                             width: 250,
                             height: 50,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
+                                border: Border.all(width: 2,color: Colors.grey),
+                                borderRadius: BorderRadius.circular(10),
                                 color: Colors.lightBlue.shade50),
                             child: TextFormField(
+                              decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
                               validator: (value) {
                                 if(value==null||value.isEmpty){
                                   return '*required field';
@@ -203,9 +211,11 @@ class _UserRegisterationState extends State<UserRegisteration> {
                             width: 250,
                             height: 50,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
+                                border: Border.all(width: 2,color: Colors.grey),
+                                borderRadius: BorderRadius.circular(10),
                                 color: Colors.lightBlue.shade50),
                             child: TextFormField(
+                              decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
                               validator: (value) {
                                 if(value==null||value.isEmpty){
                                   return '*required field';
@@ -234,9 +244,11 @@ class _UserRegisterationState extends State<UserRegisteration> {
                             width: 250,
                             height: 50,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
+                                border: Border.all(width: 2,color: Colors.grey),
+                                borderRadius: BorderRadius.circular(10),
                                 color: Colors.lightBlue.shade50),
                             child: TextFormField(
+                              decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
                               validator: (value) {
                                 if(value==null||value.isEmpty){
                                   return '*required field';
@@ -264,9 +276,11 @@ class _UserRegisterationState extends State<UserRegisteration> {
                             width: 250,
                             height: 50,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
+                                border: Border.all(width: 2,color: Colors.grey),
+                                borderRadius: BorderRadius.circular(10),
                                 color: Colors.lightBlue.shade50),
                             child: TextFormField(
+                              decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
                               validator: (value) {
                                 if(value==null||value.isEmpty){
                                   return '*required field';
@@ -291,9 +305,11 @@ class _UserRegisterationState extends State<UserRegisteration> {
                             width: 250,
                             height: 50,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
+                                border: Border.all(width: 2,color: Colors.grey),
+                                borderRadius: BorderRadius.circular(10),
                                 color: Colors.lightBlue.shade50),
                             child: TextFormField(
+                              decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
                               validator: (value) {
                                 if(value==null||value.isEmpty){
                                   return '*required field';

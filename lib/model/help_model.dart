@@ -3,13 +3,15 @@ class HelpModel {
   String helpType;
   int helpNumber;
   String userid;
+  bool isAccepted;
 
 
   HelpModel({
     this.helpid,
     required this.helpType,
     required this.helpNumber,
-    required this.userid
+    required this.userid,
+    required this.isAccepted
 
   });
 
@@ -19,6 +21,7 @@ class HelpModel {
       helpType: map['helpType'],
       helpNumber: map['helpNumber'],
       userid:map['userid'],
+      isAccepted:map['isAccepted'],
 
     );
   }
@@ -30,6 +33,7 @@ class HelpModel {
       'helpType':helpType,
       'helpNumber':helpNumber,
       'userid':userid,
+      'isAccepted':isAccepted,
 
     };
   }

@@ -149,8 +149,8 @@ class _ManageTherapyState extends State<ManageTherapy> {
                   width: 290,
                   height: 50,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Colors.lightBlue.shade50),
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.lightBlue.shade100),
                   child: TextFormField(
                     controller: mediaTitleController,
                     decoration: InputDecoration(
@@ -182,11 +182,12 @@ class _ManageTherapyState extends State<ManageTherapy> {
                   width: 290,
                   height: 50,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Colors.lightBlue.shade50),
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.lightBlue.shade100),
                   child: TextFormField(
                     controller: mediaLinkController,
-                    decoration: InputDecoration(
+                    decoration:
+                    InputDecoration(
                       hintText: 'Enter the Url',
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.only(left: 30.0),

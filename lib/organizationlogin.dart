@@ -70,9 +70,11 @@ class _OrganizationLoginState extends State<OrganizationLogin> {
                     width: 250,
                     height: 50,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
+                        border: Border.all(width: 2,color: Colors.grey),
+                        borderRadius: BorderRadius.circular(20),
                         color: Colors.lightBlue.shade50),
                     child: TextFormField(
+                      decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
                       controller: username,
                     ),
                   ),
@@ -95,11 +97,13 @@ class _OrganizationLoginState extends State<OrganizationLogin> {
                         width: 250,
                         height: 50,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
+                            border: Border.all(width: 2,color: Colors.grey),
+                            borderRadius: BorderRadius.circular(20),
                             color: Colors.lightBlue.shade50),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
+                            decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
                             controller: password,
                           ),
                         ),

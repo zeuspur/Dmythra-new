@@ -26,6 +26,7 @@ import 'package:dmythra2/physiotherapy.dart';
 import 'package:dmythra2/sponserhome.dart';
 import 'package:dmythra2/sponserlogin.dart';
 import 'package:dmythra2/sponserregistration.dart';
+import 'package:dmythra2/sponsor_profile.dart';
 import 'package:dmythra2/sponsor_viewactivities.dart';
 import 'package:dmythra2/startingpage.dart';
 import 'package:dmythra2/therapysupport.dart';

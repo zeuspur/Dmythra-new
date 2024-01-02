@@ -1,3 +1,5 @@
+import 'package:dmythra2/authent.dart';
+import 'package:dmythra2/career.dart';
 import 'package:dmythra2/orghome.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +11,11 @@ class ManageCareer extends StatefulWidget {
 }
 
 class _ManageCareerState extends State<ManageCareer> {
+  BackendServices backendServices = BackendServices();
+  TextEditingController mediaTitleController = TextEditingController();
+  TextEditingController mediaLinkController = TextEditingController();
+  String header = 'Career';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +52,7 @@ class _ManageCareerState extends State<ManageCareer> {
               Padding(
                 padding: const EdgeInsets.only(top: 75.0),
                 child: Text(
-                  'Career',
+                  header,
                   style: TextStyle(
                     fontSize: 38,
                   ),
@@ -73,9 +80,10 @@ class _ManageCareerState extends State<ManageCareer> {
                   width: 290,
                   height: 50,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(10),
                       color: Colors.lightBlue.shade50),
-                  child: TextField(
+                  child: TextFormField(
+                    controller: mediaTitleController,
                     decoration: InputDecoration(
                       hintText: 'Enter the Title',
                       border: InputBorder.none,
@@ -105,9 +113,10 @@ class _ManageCareerState extends State<ManageCareer> {
                   width: 290,
                   height: 50,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(10),
                       color: Colors.lightBlue.shade50),
-                  child: TextField(
+                  child: TextFormField(
+                    controller: mediaLinkController,
                     decoration: InputDecoration(
                       hintText: 'Enter the Url',
                       border: InputBorder.none,
@@ -122,23 +131,33 @@ class _ManageCareerState extends State<ManageCareer> {
               Positioned(
                 bottom: 100.0,
                 left: 80.0,
-                child: Container(
-                  width: 200.0,
-                  height: 50.0,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 12.0, left: 74.0),
-                    child: Text(
-                      'Submit',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w100,
-                          fontSize: 20),
+                child: InkWell(
+                  onTap: () {
+                    backendServices.saveMedia(mediaTitleController.text, header, mediaLinkController.text, header);
+                    // if(Career == ''){
+                    //   print('select a mode');
+                    // }else{
+                    //   backendServices.saveMedia(mediaTitleController.text, Career, mediaLinkController.text, Career);
+                    // }
+                  },
+                  child: Container(
+                    width: 200.0,
+                    height: 50.0,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 12.0, left: 74.0),
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w100,
+                            fontSize: 20),
+                      ),
                     ),
-                  ),
-                  decoration: BoxDecoration(
-                    // Define your desired decoration here
-                    borderRadius: BorderRadius.circular(30.0),
-                    color: Colors.blue.shade900,
+                    decoration: BoxDecoration(
+                      // Define your desired decoration here
+                      borderRadius: BorderRadius.circular(30.0),
+                      color: Colors.blue.shade900,
+                    ),
                   ),
                 ),
               ),

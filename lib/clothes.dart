@@ -63,7 +63,7 @@ class _ClothesState extends State<Clothes> {
                   width: 290,
                   height: 50,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(10),
                       color: Colors.lightBlue.shade50),
                   child: TextFormField(
                     controller: helptypeController,
@@ -93,7 +93,7 @@ class _ClothesState extends State<Clothes> {
                   width: 290,
                   height: 50,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(10),
                       color: Colors.lightBlue.shade50),
                   child: TextFormField(
                     controller: helpNumberController,

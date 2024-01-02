@@ -87,7 +87,7 @@ class _User_SponsorListState extends State<User_SponsorList> {
                                         return Column(
                                           children: [
                                             Container(
-                                              // height: 200,
+                                              height: 240,
                                               width: 300,
                                               decoration: BoxDecoration(
                                                   color: Colors.grey.shade300,
@@ -97,25 +97,25 @@ class _User_SponsorListState extends State<User_SponsorList> {
                                               child: Column(
                                                 children: [
                                                   Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
+                                                    // mainAxisAlignment:
+                                                    //     MainAxisAlignment.start,
                                                     children: [
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                top: 8.0,
-                                                                left: 18.0),
-                                                        child: Container(
-                                                          width: 50,
-                                                          height: 50,
-                                                          child: CircleAvatar(
-                                                            backgroundImage:
-                                                                AssetImage(
-                                                                    "assets/Ellipse 10.png"),
-                                                          ),
-                                                        ),
-                                                      ),
+                                                      // Padding(
+                                                      //   padding:
+                                                      //       const EdgeInsets
+                                                      //               .only(
+                                                      //           top: 8.0,
+                                                      //           left: 18.0),
+                                                      //   child: Container(
+                                                      //     width: 50,
+                                                      //     height: 50,
+                                                      //     child: CircleAvatar(
+                                                      //       backgroundImage:
+                                                      //           AssetImage(
+                                                      //               "assets/Ellipse 10.png"),
+                                                      //     ),
+                                                      //   ),
+                                                      // ),
                                                       Container(
                                                         child: Padding(
                                                           padding:
@@ -124,8 +124,7 @@ class _User_SponsorListState extends State<User_SponsorList> {
                                                                   left: 8,
                                                                   top: 14),
                                                           child: Text(
-                                                            backendServices.sponsorsList[index].sponsorname,
-                                                            style: TextStyle(
+                                                              'Name:${backendServices.sponsorsList[index].sponsorname }',                                                            style: TextStyle(
                                                                 fontSize: 24),
                                                           ),
                                                         ),
@@ -134,7 +133,7 @@ class _User_SponsorListState extends State<User_SponsorList> {
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        const EdgeInsets.only(
+                                                        const EdgeInsets.only(right: 110,
                                                              top: 10),
                                                     child: Text(
                                                       'Ph:${backendServices.sponsorsList[index].phone }',
@@ -142,47 +141,35 @@ class _User_SponsorListState extends State<User_SponsorList> {
                                                           fontSize: 20),
                                                     ),
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 20, top: 10),
-                                                    child: Text(
-                                                      'Email:${backendServices.sponsorsList[index].email }',
-                                                      style: TextStyle(
-                                                          fontSize: 20),
-                                                      // style: TextStyle(
-                                                      //      fontSize: 20),
-                                                    ),
+                                                  Text(
+                                                    'Email:${backendServices.sponsorsList[index].email }',
+                                                    style: TextStyle(
+                                                        fontSize: 20),
+                                                    // style: TextStyle(
+                                                    //      fontSize: 20),
                                                   ),
-                                                  Padding(
-                                                    padding: EdgeInsets.only(
-                                                      top: 10,
-                                                      left: 110,
+                                                  // Padding(
+                                                  //   padding: EdgeInsets.only(
+                                                  //     top: 10,
+                                                  //     left: 110,
+                                                  //   ),
+                                                  Spacer(),
+                                                     ElevatedButton(
+                                                      onPressed: () {
+                                                    backendServices.callingFunction(backendServices.sponsorsList[index].phone.toString());
+                                                      },
+                                                      style: ButtonStyle(
+                                                          backgroundColor:
+                                                              MaterialStatePropertyAll(
+                                                                  Colors
+                                                                      .green)),
+                                                      child: Icon(
+                                                        Icons.call,
+                                                        color: Colors
+                                                            .black,
+                                                      ),
                                                     ),
-                                                    child: Row(
-                                                      children: [
-                                                        ElevatedButton(
-                                                          onPressed: () {
-                                                        backendServices.callingFunction(backendServices.sponsorsList[index].phone.toString());
-                                                          },
-                                                          style: ButtonStyle(
-                                                              backgroundColor:
-                                                                  MaterialStatePropertyAll(
-                                                                      Colors
-                                                                          .green)),
-                                                          child: Column(
-                                                            children: [
-                                                              Icon(
-                                                                Icons.call,
-                                                                color: Colors
-                                                                    .black,
-                                                              )
-                                                            ],
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  )
+
                                                 ],
                                               ),
                                             ),

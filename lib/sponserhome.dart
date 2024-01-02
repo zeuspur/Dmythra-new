@@ -1,7 +1,9 @@
 
+import 'package:dmythra2/authent.dart';
 import 'package:dmythra2/sponsor_managerequest.dart';
 import 'package:dmythra2/sponsor_viewactivities.dart';
 import 'package:flutter/material.dart';
+import 'package:dmythra2/sponsor_profile.dart';
 
 class SponsorHome extends StatefulWidget {
   const SponsorHome({super.key});
@@ -11,6 +13,7 @@ class SponsorHome extends StatefulWidget {
 }
 
 class _SponsorHomeState extends State<SponsorHome> {
+  BackendServices backendServices = BackendServices();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,6 +27,20 @@ class _SponsorHomeState extends State<SponsorHome> {
               Navigator.pop(context);
             },
             icon: Icon(Icons.arrow_back_ios)),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SponsorProfile(),
+                ),
+              );
+              // Handle profile icon tap action here
+            },
+            icon: Icon(Icons.person),
+          ),
+        ],
       ),
       body: Container(
         width: double.infinity,
@@ -61,21 +78,26 @@ class _SponsorHomeState extends State<SponsorHome> {
                   ),
                 ),
                 SizedBox(height: 50,),
-                Container(
-                  height: 110,
-                  width: 160,
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 18.0),
-                      child: Text(
-                        '      Call Organization',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
+                InkWell(
+                  onTap: () {
+                    backendServices.callingFunction("${7594003268}");
+                  },
+                  child: Container(
+                    height: 110,
+                    width: 160,
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 18.0),
+                        child: Text(
+                          '      Call Organization',
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        ),
                       ),
                     ),
+                    decoration: BoxDecoration(
+                        color: Colors.blue.shade900,
+                        borderRadius: BorderRadius.circular(20)),
                   ),
-                  decoration: BoxDecoration(
-                      color: Colors.blue.shade900,
-                      borderRadius: BorderRadius.circular(20)),
                 )
               ],
             ),

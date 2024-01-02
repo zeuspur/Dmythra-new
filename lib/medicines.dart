@@ -69,7 +69,7 @@ class _MedicinesState extends State<Medicines> {
                   width: 290,
                   height: 50,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(10),
                       color: Colors.lightBlue.shade50),
                   child: TextFormField(
                     onTap: () {
@@ -110,7 +110,7 @@ class _MedicinesState extends State<Medicines> {
                   ),
                   decoration: BoxDecoration(
                     // Define your desired decoration here
-                    borderRadius: BorderRadius.circular(30.0),
+                    borderRadius: BorderRadius.circular(10),
                     color: Colors.blue.shade900,
                   ),
                 ),
@@ -133,7 +133,7 @@ class _MedicinesState extends State<Medicines> {
                   width: 290,
                   height: 50,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(10),
                       color: Colors.lightBlue.shade50),
                   child: TextFormField(
                     controller: phoneController,
@@ -166,7 +166,7 @@ class _MedicinesState extends State<Medicines> {
                   width: 290,
                   height: 50,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(10),
                       color: Colors.lightBlue.shade50),
                   child: TextFormField(
                     controller: descriptionController,

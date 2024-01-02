@@ -1,3 +1,5 @@
+import 'package:dmythra2/academic.dart';
+import 'package:dmythra2/authent.dart';
 import 'package:flutter/material.dart';
 
 class ManageAcademic extends StatefulWidget {
@@ -8,6 +10,10 @@ class ManageAcademic extends StatefulWidget {
 }
 
 class _ManageAcademicState extends State<ManageAcademic> {
+  BackendServices backendServices = BackendServices();
+  TextEditingController mediaTitleController = TextEditingController();
+  TextEditingController mediaLinkController = TextEditingController();
+  String header = 'Academic';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,8 +32,9 @@ class _ManageAcademicState extends State<ManageAcademic> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon( Icons.home, )),
-
+              icon: Icon(
+                Icons.home,
+              )),
         ],
       ),
       body: Container(
@@ -44,7 +51,7 @@ class _ManageAcademicState extends State<ManageAcademic> {
               Padding(
                 padding: const EdgeInsets.only(top: 75.0),
                 child: Text(
-                  'Academic',
+                  header,
                   style: TextStyle(
                     fontSize: 38,
                   ),
@@ -72,9 +79,10 @@ class _ManageAcademicState extends State<ManageAcademic> {
                   width: 290,
                   height: 50,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(10),
                       color: Colors.lightBlue.shade50),
-                  child: TextField(
+                  child: TextFormField(
+                    controller: mediaTitleController,
                     decoration: InputDecoration(
                       hintText: 'Enter the Title',
                       border: InputBorder.none,
@@ -104,9 +112,10 @@ class _ManageAcademicState extends State<ManageAcademic> {
                   width: 290,
                   height: 50,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(10),
                       color: Colors.lightBlue.shade50),
-                  child: TextField(
+                  child: TextFormField(
+                    controller: mediaLinkController,
                     decoration: InputDecoration(
                       hintText: 'Enter the Url',
                       border: InputBorder.none,
@@ -121,23 +130,34 @@ class _ManageAcademicState extends State<ManageAcademic> {
               Positioned(
                 bottom: 100.0,
                 left: 80.0,
-                child: Container(
-                  width: 200.0,
-                  height: 50.0,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 12.0, left: 74.0),
-                    child: Text(
-                      'Submit',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w100,
-                          fontSize: 20),
+                child: InkWell(
+                  onTap: () {
+                    backendServices.saveMedia(
+                      mediaTitleController.text,
+                      header,
+                      mediaLinkController.text,
+                      header,
+                        // Navigator.of(context).pop();
+                    );
+                  },
+                  child: Container(
+                    width: 200.0,
+                    height: 50.0,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 12.0, left: 74.0),
+                      child: Text(
+                        'Post',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w100,
+                            fontSize: 20),
+                      ),
                     ),
-                  ),
-                  decoration: BoxDecoration(
-                    // Define your desired decoration here
-                    borderRadius: BorderRadius.circular(30.0),
-                    color: Colors.blue.shade900,
+                    decoration: BoxDecoration(
+                      // Define your desired decoration here
+                      borderRadius: BorderRadius.circular(30.0),
+                      color: Colors.blue.shade900,
+                    ),
                   ),
                 ),
               ),

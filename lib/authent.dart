@@ -240,6 +240,33 @@ class BackendServices {
     }
   }
 
+  String? _sponsorid;
+  String get sponsorid => _sponsorid!;
+
+  Future fetchSponsorData() async {
+    try {
+      print('Fethcing data _________');
+      await firebaseFirestore
+          .collection('sponsors')
+          .doc(firebaseAuth.currentUser!.uid)
+          .get()
+          .then((DocumentSnapshot snapshot) {
+        _sponsorModel = SponsorModel(
+          sponsorid: snapshot['sponsorid'],
+          sponsorname: snapshot['sponsorname'],
+          dob: snapshot['dob'],
+          email: snapshot['email'],
+          aadhar: snapshot['aadhar'],
+          phone: snapshot['phone'],
+        );
+        _sponsorid = sponsorModel.sponsorid;
+        print('Fethcing completed _________');
+      });
+    } catch (e) {
+      print('Fetching user failed : $e');
+    }
+  }
+
   //-------------------------Activity(post)------------------------------------
 
   PostModel? _postModel;
@@ -300,6 +327,7 @@ class BackendServices {
   Future<void> savePost(
     String postPic,
     String postBio,
+    String username,
   ) async {
     String postID = firebaseFirestore
         .collection('users')
@@ -312,7 +340,8 @@ class BackendServices {
         postid: postID,
         postPic: postPic,
         postBio: postBio,
-        userid: firebaseAuth.currentUser!.uid);
+        userid: firebaseAuth.currentUser!.uid,
+        username: username);
 
     await firebaseFirestore
         .collection('users')
@@ -324,6 +353,34 @@ class BackendServices {
         .collection('users posts')
         .doc(postID)
         .set(_postModel!.toMap(postID));
+  }
+
+  List<PostModel> postsList = [];
+  PostModel? posts;
+  Future<void> fetchPosts() async {
+    try {
+      postsList.clear();
+      CollectionReference postRef = firebaseFirestore.collection('users posts');
+      QuerySnapshot postsSnapshot = await postRef.get();
+
+      for (var doc in postsSnapshot.docs) {
+        String postid = doc['postid'];
+        String postPic = doc['postPic'];
+        String postBio = doc['postBio'];
+        String userid = doc['userid'];
+        String username = doc['username'];
+
+        posts = PostModel(
+          postPic: postPic,
+          postBio: postBio,
+          userid: userid,
+          username: username,
+        );
+        postsList.add(posts!);
+      }
+    } catch (e) {
+      print('posts fetching failed : $e');
+    }
   }
 
   //------------------------HELP--------------------------------------------
@@ -347,7 +404,8 @@ class BackendServices {
         helpid: helpID,
         helpType: helpType,
         helpNumber: helpNumber,
-        userid: firebaseAuth.currentUser!.uid);
+        userid: firebaseAuth.currentUser!.uid,
+        isAccepted: false);
 
     await firebaseFirestore
         .collection('users')
@@ -359,6 +417,48 @@ class BackendServices {
         .collection(collectionName)
         .doc(helpID)
         .set(_helpModel!.toMap(helpID));
+  }
+
+  List<Map<String, dynamic>> requestList = [];
+  List<Map<String, dynamic>> acceptedrequestList = [];
+  List<String> collections = [
+    'Food Help',
+    'Fund Help',
+    'Clothes Help',
+    'Transportation Help',
+    'Other Help'
+  ];
+
+  Future<void> fetchHelps() async {
+    try {
+      requestList.clear();
+      for (String collectionName in collections) {
+        QuerySnapshot<Map<String, dynamic>> querySnapshot =
+            await firebaseFirestore
+                .collection(collectionName)
+                .where('isAccepted', isEqualTo: false)
+                .get();
+        requestList.addAll(querySnapshot.docs.map((doc) => doc.data()));
+      }
+    } catch (e) {
+      print('Fetching help failed : $e');
+    }
+  }
+
+  Future<void> fetchAcceptedHelps() async {
+    try {
+      acceptedrequestList.clear();
+      for (String collectionName in collections) {
+        QuerySnapshot<Map<String, dynamic>> querySnapshot =
+            await firebaseFirestore
+                .collection(collectionName)
+                .where('isAccepted', isEqualTo: true)
+                .get();
+        acceptedrequestList.addAll(querySnapshot.docs.map((doc) => doc.data()));
+      }
+    } catch (e) {
+      print('Fetching help failed : $e');
+    }
   }
 
   //--------------------FETCH SPONSOR-------------------------
@@ -475,7 +575,8 @@ class BackendServices {
         prescription: prescription,
         phone: phone,
         description: description,
-        userID: firebaseAuth.currentUser!.uid);
+        userID: firebaseAuth.currentUser!.uid,
+        isAccepted: false);
 
     await firebaseFirestore
         .collection('users')
@@ -516,6 +617,38 @@ class BackendServices {
   void callingFunction(String phone) async {
     FlutterPhoneDirectCaller.callNumber(phone);
     log('calling $phone');
+  }
+
+  List<MedicineModel> medicineList = [];
+  MedicineModel? medicines;
+  Future<void> fetchMedicines() async {
+    try {
+      medicineList.clear();
+      CollectionReference medicinesRef =
+          firebaseFirestore.collection('medicine help');
+      QuerySnapshot medicineSnapshot =
+          await medicinesRef.where('isAccepted', isEqualTo: false).get();
+
+      for (var doc in medicineSnapshot.docs) {
+        String medicineid = doc['medicineid'];
+        String prescription = doc['prescription'];
+        int phone = doc['phone'];
+        String description = doc['description'];
+        String userID = doc['userID'];
+        bool isAccepted = doc['isAccepted'];
+
+        medicines = MedicineModel(
+          prescription: prescription,
+          phone: phone,
+          description: description,
+          userID: userID,
+          isAccepted: isAccepted,
+        );
+        medicineList.add(medicines!);
+      }
+    } catch (e) {
+      print('Medicines fetching failed : $e');
+    }
   }
 
   //------------------------------------ORGANIZATION----------------------------
@@ -568,9 +701,12 @@ class BackendServices {
     }
   }
 
-  Future<void> deleteUser(String collectionName,String userId) async {
+  Future<void> deleteUser(String collectionName, String userId) async {
     try {
-      await FirebaseFirestore.instance.collection(collectionName).doc(userId).delete();
+      await FirebaseFirestore.instance
+          .collection(collectionName)
+          .doc(userId)
+          .delete();
       print('User deleted successfully');
     } catch (e) {
       print('Error deleting user: $e');

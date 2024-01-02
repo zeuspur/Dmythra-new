@@ -76,9 +76,11 @@ class _UserLoginState extends State<UserLogin> {
                       width: 250,
                       height: 50,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
+                        border: Border.all(width: 2,color: Colors.grey),
+                          borderRadius: BorderRadius.circular(20),
                           color: Colors.lightBlue.shade50),
                       child: TextFormField(
+                        decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return '*required field';
@@ -109,11 +111,13 @@ class _UserLoginState extends State<UserLogin> {
                           width: 250,
                           height: 50,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
+                              border: Border.all(width: 2,color: Colors.grey),
+                              borderRadius: BorderRadius.circular(20),
                               color: Colors.lightBlue.shade50),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: TextFormField(
+                              decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return '*required field';

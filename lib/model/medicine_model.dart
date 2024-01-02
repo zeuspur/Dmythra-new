@@ -4,6 +4,7 @@ class MedicineModel {
   int phone;
   String description;
   String userID;
+  bool isAccepted;
 
 
   MedicineModel({
@@ -12,6 +13,7 @@ class MedicineModel {
     required this.phone,
     required this.description,
     required this.userID,
+    required this.isAccepted,
 
   });
 
@@ -22,6 +24,7 @@ class MedicineModel {
       phone: map['phone'],
       description:map['description'],
       userID:map['userID'],
+      isAccepted:map['isAccepted'],
 
     );
   }
@@ -34,6 +37,7 @@ class MedicineModel {
       'phone':phone,
       'description':description,
       'userID':userID,
+      'isAccepted':isAccepted,
 
     };
   }

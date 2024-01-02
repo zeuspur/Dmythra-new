@@ -1,19 +1,38 @@
 import 'package:dmythra2/authent.dart';
-import 'package:dmythra2/orghome.dart';
+import 'package:dmythra2/org_acceptedrequest.dart';
 import 'package:flutter/material.dart';
 
-class AcceptedRequest extends StatefulWidget {
-  const AcceptedRequest({super.key});
+class MedicineRequest extends StatefulWidget {
+  const MedicineRequest({super.key});
 
   @override
-  State<AcceptedRequest> createState() => _AcceptedRequestState();
+  State<MedicineRequest> createState() => _MedicineRequestState();
 }
 
-class _AcceptedRequestState extends State<AcceptedRequest> {
+class _MedicineRequestState extends State<MedicineRequest> {
   BackendServices backendServices = BackendServices();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        bottomNavigationBar: Container(
+          height: 70,
+          width: double.infinity,
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AcceptedRequest(),
+                ),
+              );
+            },
+            style: ButtonStyle(
+                backgroundColor:
+                    MaterialStatePropertyAll(Colors.blue.shade900)),
+            child: Text("Accepted Requests",
+                style: TextStyle(color: Colors.white)),
+          ),
+        ),
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           automaticallyImplyLeading: true,
@@ -27,12 +46,7 @@ class _AcceptedRequestState extends State<AcceptedRequest> {
           actions: [
             IconButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => OrganizationHome(),
-                    ),
-                  );
+                  Navigator.pop(context);
                 },
                 icon: Icon(
                   Icons.home,
@@ -44,7 +58,7 @@ class _AcceptedRequestState extends State<AcceptedRequest> {
             Padding(
               padding: const EdgeInsets.only(top: 75.0, left: 20.0),
               child: Text(
-                'Accepted request',
+                'All Request',
                 style: TextStyle(
                   fontSize: 38,
                 ),
@@ -53,20 +67,21 @@ class _AcceptedRequestState extends State<AcceptedRequest> {
             Padding(
               padding: const EdgeInsets.only(top: 18.0, left: 25.0),
               child: Container(
-                height: 600,
+                height: 560,
                 width: 300,
                 child: FutureBuilder(
-                    future: backendServices.fetchAcceptedHelps(),
+                    future: backendServices.fetchMedicines(),
                     builder: (context, snapshot) {
                       return snapshot.connectionState == ConnectionState.waiting
                           ? Center(
                               child: CircularProgressIndicator(),
                             )
-                          : backendServices.acceptedrequestList.isEmpty
+                          : backendServices.medicineList.isEmpty
                               ? Center(
-                                  child: Text('No Requests Accepted'),
+                                  child: Text('No requests Found'),
                                 )
                               : ListView.separated(
+                                  scrollDirection: Axis.vertical,
                                   separatorBuilder:
                                       (BuildContext context, int index) {
                                     return Container(
@@ -75,7 +90,8 @@ class _AcceptedRequestState extends State<AcceptedRequest> {
                                     );
                                   },
                                   padding: const EdgeInsets.all(8),
-                                  itemCount: backendServices.acceptedrequestList.length,
+                                  itemCount:
+                                      backendServices.medicineList.length,
                                   itemBuilder:
                                       (BuildContext context, int index) {
                                     return Column(
@@ -103,7 +119,7 @@ class _AcceptedRequestState extends State<AcceptedRequest> {
                                                       height: 50,
                                                       child: CircleAvatar(
                                                         backgroundImage: AssetImage(
-                                                            "assets/medication.png"),
+                                                            "assets/sponge.png"),
                                                       ),
                                                     ),
                                                   ),
@@ -113,7 +129,7 @@ class _AcceptedRequestState extends State<AcceptedRequest> {
                                                 padding: const EdgeInsets.only(
                                                     right: 180.0),
                                                 child: Text(
-                                                  'UD ID',
+                                                  'Phone',
                                                   style:
                                                       TextStyle(fontSize: 20),
                                                   // style: TextStyle(
@@ -129,7 +145,11 @@ class _AcceptedRequestState extends State<AcceptedRequest> {
                                                             30),
                                                     color: Colors
                                                         .lightBlue.shade50),
-                                                child: TextField(),
+                                                child: Center(
+                                                    child: Text(backendServices
+                                                        .medicineList[index]
+                                                        .phone
+                                                        .toString())),
                                               ),
                                               Padding(
                                                 padding: const EdgeInsets.only(
@@ -141,9 +161,6 @@ class _AcceptedRequestState extends State<AcceptedRequest> {
                                                   // style: TextStyle(
                                                   //      fontSize: 20),
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                height: 2,
                                               ),
                                               Container(
                                                 width: 250,
@@ -159,7 +176,9 @@ class _AcceptedRequestState extends State<AcceptedRequest> {
                                                       const EdgeInsets.only(
                                                           left: 78, top: 10),
                                                   child: Text(
-                                                    'Medicines',
+                                                    backendServices
+                                                        .medicineList[index]
+                                                        .description,
                                                     style:
                                                         TextStyle(fontSize: 20),
                                                   ),
@@ -167,15 +186,15 @@ class _AcceptedRequestState extends State<AcceptedRequest> {
                                               ),
                                               Padding(
                                                 padding: EdgeInsets.only(
-                                                  top: 10,
-                                                  left: 90,
-                                                ),
+                                                    top: 10,
+                                                    left: 18,
+                                                    right: 18),
                                                 child: Row(
                                                   children: [
                                                     ElevatedButton(
                                                         onPressed: () {},
                                                         child: Text(
-                                                          "Accepted",
+                                                          "Reject",
                                                           style: TextStyle(
                                                               color:
                                                                   Colors.white),
@@ -183,9 +202,23 @@ class _AcceptedRequestState extends State<AcceptedRequest> {
                                                         style: ButtonStyle(
                                                             backgroundColor:
                                                                 MaterialStatePropertyAll(
-                                                                    Colors
-                                                                        .green))),
+                                                                    Colors.blue
+                                                                        .shade900))),
                                                     Spacer(),
+                                                    ElevatedButton(
+                                                      onPressed: () {},
+                                                      child: Text(
+                                                        "Accept",
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.white),
+                                                      ),
+                                                      style: ButtonStyle(
+                                                          backgroundColor:
+                                                              MaterialStatePropertyAll(
+                                                                  Colors.blue
+                                                                      .shade900)),
+                                                    ),
                                                   ],
                                                 ),
                                               )
@@ -201,4 +234,8 @@ class _AcceptedRequestState extends State<AcceptedRequest> {
           ]),
         ));
   }
+// List<String >name=[
+//   "ajith"
+//   "rahul","nithi","ashok","ajmal"
+// ];
 }

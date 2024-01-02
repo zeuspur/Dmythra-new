@@ -81,7 +81,7 @@ class _TherapySupportState extends State<TherapySupport> {
                 height: 50,
                 width: 300,
                 child: Text(
-                  'Medication',
+                  'Meditation',
                   style: TextStyle(color: Colors.white, fontSize: 20),),
                 decoration: BoxDecoration(
                   color: Colors.blue.shade900,

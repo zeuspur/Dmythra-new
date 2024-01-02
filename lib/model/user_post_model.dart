@@ -3,13 +3,15 @@ class PostModel {
   String postPic;
   String postBio;
   String userid;
+  String username;
 
 
   PostModel({
      this.postid,
     required this.postPic,
     required this.postBio,
-    required this.userid
+    required this.userid,
+    required this.username,
 
   });
 
@@ -19,6 +21,7 @@ class PostModel {
       postPic: map['postPic'],
       postBio: map['postBio'],
       userid:map['userid'],
+      username:map['username'],
 
     );
   }
@@ -30,6 +33,7 @@ class PostModel {
       'postPic':postPic,
       'postBio':postBio,
       'userid':userid,
+      'username':username,
 
     };
   }

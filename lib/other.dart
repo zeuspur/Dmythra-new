@@ -67,7 +67,7 @@ class _OtherState extends State<Other> {
                   width: 290,
                   height: 50,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(10),
                       color: Colors.lightBlue.shade50),
                   child: TextFormField(
                     controller: helptypeController,
@@ -100,7 +100,7 @@ class _OtherState extends State<Other> {
                   width: 290,
                   height: 50,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(10),
                       color: Colors.lightBlue.shade50),
                   child: TextFormField(
                     controller: helpNumberController,

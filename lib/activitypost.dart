@@ -11,6 +11,13 @@ class ActivityPost extends StatefulWidget {
 class _ActivityPostState extends State<ActivityPost> {
   BackendServices backendServices = BackendServices();
   TextEditingController bioController = TextEditingController();
+
+  @override
+  void initState() {
+    backendServices.fetchUserData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,13 +117,14 @@ class _ActivityPostState extends State<ActivityPost> {
             bottom: 100.0,
             left: 80.0,
             child: InkWell(
-              onTap: ()async {
-               await backendServices
-                    .savePost(backendServices.postPic!.path, bioController.text);
+              onTap: () async {
+                // await backendServices.fetchUserData();
+                await backendServices.savePost(backendServices.postPic!.path,
+                    bioController.text, backendServices.userModel.username);
 
-               backendServices.uploadPostPhoto(backendServices.postPic!,bioController.text);
-               Navigator.of(context).pop();
-
+                backendServices.uploadPostPhoto(
+                    backendServices.postPic!, bioController.text);
+                Navigator.of(context).pop();
               },
               child: Container(
                 width: 200.0,

@@ -1,3 +1,4 @@
+import 'package:dmythra2/authent.dart';
 import 'package:dmythra2/orghome.dart';
 import 'package:flutter/material.dart';
 class Academic extends StatefulWidget {
@@ -8,6 +9,7 @@ class Academic extends StatefulWidget {
 }
 
 class _AcademicState extends State<Academic> {
+  BackendServices backendServices =BackendServices();
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -49,48 +51,97 @@ class _AcademicState extends State<Academic> {
                     ),
                   ),
                 ),
-                Container(
-                  height: 220,
-                  width: double.infinity,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 240.0),
-                  child: Container(
-                    child: Text(
-                      'Title',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 3,
-                ),
-                Container(
-                  width: 290,
-                  height: 50,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Colors.lightBlue.shade50),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 65,top: 10),
-                    child: Text('Academic Support',style: TextStyle(fontSize: 20),),
-                  ),
-                ),
-                SizedBox(
-                  height: 25,
-                ),
-                Container(
-                  width: 290,
-                  height: 50,
-
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Colors.lightBlue.shade50),
-                  child:Padding(
-                    padding: const EdgeInsets.only(left: 28.0,top: 5),
-                    child: Text('https://youtu.be/RDxMxOKpoQQ?si=nUWPQPq1CPoJb6tU'),
-                  ),
-                  // TextField(),
+                Expanded(
+                  child: FutureBuilder(
+                      future: backendServices.fetchMedias('Academic'),
+                      builder: (context, snapshot) {
+                        return snapshot.connectionState == ConnectionState.waiting
+                            ? Center(
+                          child: CircularProgressIndicator(),
+                        )
+                            : backendServices.mediaList.isEmpty
+                            ? Center(
+                          child: Text('List is empty'),
+                        )
+                            : ListView.separated(
+                            separatorBuilder: (context, index) => SizedBox(
+                              height: 20,
+                            ),
+                            itemCount: backendServices.mediaList.length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20),
+                                child: Container(
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                      color: Colors.blue,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(20))),
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            right: 240.0),
+                                        child: Container(
+                                          child: Text(
+                                            'Title',
+                                            style: TextStyle(fontSize: 20),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 3,
+                                      ),
+                                      Container(
+                                        width: 290,
+                                        height: 50,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                            BorderRadius.circular(30),
+                                            color:
+                                            Colors.lightBlue.shade50),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 38.0, top: 10),
+                                          child: Text(
+                                            backendServices.mediaList[index]
+                                                .mediaTitle,
+                                            style: TextStyle(fontSize: 20),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 25,
+                                      ),
+                                      ElevatedButton(onPressed: (){
+                                        backendServices.launchYouTubeVideo(backendServices.mediaList[index].mediaLink);
+                                      }, child: Text('Click here'))
+                                      // InkWell(
+                                      //   child: Container(
+                                      //     width: 290,
+                                      //     height: 50,
+                                      //
+                                      //     decoration: BoxDecoration(
+                                      //         borderRadius:
+                                      //             BorderRadius.circular(30),
+                                      //         color:
+                                      //             Colors.lightBlue.shade50),
+                                      //     child: Padding(
+                                      //       padding: const EdgeInsets.only(
+                                      //           left: 28, top: 5),
+                                      //       child: Text(backendServices
+                                      //           .mediaList[index].mediaLink),
+                                      //     ),
+                                      //     // TextField(),
+                                      //   ),
+                                      // ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            });
+                      }),
                 ),
                 SizedBox(
                   height: 10,
