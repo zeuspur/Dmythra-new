@@ -33,6 +33,18 @@ class _UserRegisterationState extends State<UserRegisteration> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          centerTitle: true,
+          // title: Text(backendServices.userModel.username),
+          backgroundColor: Colors.transparent,
+          automaticallyImplyLeading: false,
+          leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Icon(Icons.arrow_back_ios)),
+        ),
         backgroundColor: Colors.transparent,
         body: Container(
             width: double.infinity,
@@ -47,37 +59,9 @@ class _UserRegisterationState extends State<UserRegisteration> {
               child: Center(
                 child: SingleChildScrollView(
                   child: Column(children: [
-                    Container(
-                      color: Colors.transparent,
-                      width: MediaQuery.of(context).size.width,
-                      height: 90,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          IconButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              icon: Icon(Icons.arrow_back_ios_new_rounded)),
-                        ],
-                      ),
-                    ),
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 188.0),
-                            child: SizedBox(
-                              height: 30,
-                              child: Text(
-                                'UD ID',
-                                style: TextStyle(fontSize: 20),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 3,
-                          ),
                           Container(
                             width: 250,
                             height: 50,
@@ -86,7 +70,7 @@ class _UserRegisterationState extends State<UserRegisteration> {
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.lightBlue.shade50),
                             child: TextFormField(
-                              decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
+                              decoration: InputDecoration( hintText: 'UD ID',border: UnderlineInputBorder(borderSide: BorderSide.none), contentPadding: EdgeInsets.only(left: 30.0),),
                               validator: (value) {
                                 if(value==null||value.isEmpty){
                                   return '*required field';
@@ -97,20 +81,7 @@ class _UserRegisterationState extends State<UserRegisteration> {
                               controller: udidController,
                             ),
                           ),
-                          SizedBox(height: 10,),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 188.0),
-                            child: SizedBox(
-                              height: 30,
-                              child: Text(
-                                'Name',
-                                style: TextStyle(fontSize: 20),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 3,
-                          ),
+                          SizedBox(height: 20,),
                           Container(
                             width: 250,
                             height: 50,
@@ -119,7 +90,7 @@ class _UserRegisterationState extends State<UserRegisteration> {
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.lightBlue.shade50),
                             child: TextFormField(
-                              decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
+                              decoration: InputDecoration(hintText: 'Name',border: UnderlineInputBorder(borderSide: BorderSide.none), contentPadding: EdgeInsets.only(left: 30.0),),
                               validator: (value) {
                                 if(value==null||value.isEmpty){
                                   return '*required field';
@@ -131,17 +102,7 @@ class _UserRegisterationState extends State<UserRegisteration> {
                             ),
                           ),
                           SizedBox(
-                            height: 12,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 115.0),
-                            child: Text(
-                              'Disability type',
-                              style: TextStyle(fontSize: 20),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 3,
+                            height: 20,
                           ),
                           Container(
                             width: 250,
@@ -151,7 +112,7 @@ class _UserRegisterationState extends State<UserRegisteration> {
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.lightBlue.shade50),
                             child: TextFormField(
-                              decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
+                              decoration: InputDecoration(hintText: 'Disability type',border: UnderlineInputBorder(borderSide: BorderSide.none), contentPadding: EdgeInsets.only(left: 30.0),),
                               validator: (value) {
                                 if(value==null||value.isEmpty){
                                   return '*required field';
@@ -163,17 +124,7 @@ class _UserRegisterationState extends State<UserRegisteration> {
                             ),
                           ),
                           SizedBox(
-                            height: 10,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 128.0),
-                            child: Text(
-                              'Date of birth',
-                              style: TextStyle(fontSize: 20),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 3,
+                            height: 20,
                           ),
                           Container(
                             width: 250,
@@ -183,7 +134,7 @@ class _UserRegisterationState extends State<UserRegisteration> {
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.lightBlue.shade50),
                             child: TextFormField(
-                              decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
+                              decoration: InputDecoration(hintText: 'Date of birth',border: UnderlineInputBorder(borderSide: BorderSide.none), contentPadding: EdgeInsets.only(left: 30.0),),
                               validator: (value) {
                                 if(value==null||value.isEmpty){
                                   return '*required field';
@@ -195,17 +146,7 @@ class _UserRegisterationState extends State<UserRegisteration> {
                             ),
                           ),
                           SizedBox(
-                            height: 10,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 158.0),
-                            child: Text(
-                              'Email ID',
-                              style: TextStyle(fontSize: 20),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5,
+                            height: 20,
                           ),
                           Container(
                             width: 250,
@@ -215,7 +156,7 @@ class _UserRegisterationState extends State<UserRegisteration> {
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.lightBlue.shade50),
                             child: TextFormField(
-                              decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
+                              decoration: InputDecoration(hintText: 'Email ID',border: UnderlineInputBorder(borderSide: BorderSide.none), contentPadding: EdgeInsets.only(left: 30.0),),
                               validator: (value) {
                                 if(value==null||value.isEmpty){
                                   return '*required field';
@@ -228,17 +169,7 @@ class _UserRegisterationState extends State<UserRegisteration> {
                             ),
                           ),
                           SizedBox(
-                            height: 10,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 158.0),
-                            child: Text(
-                              'Password',
-                              style: TextStyle(fontSize: 20),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 3,
+                            height: 20,
                           ),
                           Container(
                             width: 250,
@@ -248,7 +179,7 @@ class _UserRegisterationState extends State<UserRegisteration> {
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.lightBlue.shade50),
                             child: TextFormField(
-                              decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
+                              decoration: InputDecoration(hintText: 'Password',border: UnderlineInputBorder(borderSide: BorderSide.none), contentPadding: EdgeInsets.only(left: 30.0),),
                               validator: (value) {
                                 if(value==null||value.isEmpty){
                                   return '*required field';
@@ -260,17 +191,7 @@ class _UserRegisterationState extends State<UserRegisteration> {
                             ),
                           ),
                           SizedBox(
-                            height: 3,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 158.0),
-                            child: Text(
-                              'Aadhar no',
-                              style: TextStyle(fontSize: 20),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 3,
+                            height: 20,
                           ),
                           Container(
                             width: 250,
@@ -280,7 +201,7 @@ class _UserRegisterationState extends State<UserRegisteration> {
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.lightBlue.shade50),
                             child: TextFormField(
-                              decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
+                              decoration: InputDecoration(hintText: 'Aadhar no',border: UnderlineInputBorder(borderSide: BorderSide.none), contentPadding: EdgeInsets.only(left: 30.0),),
                               validator: (value) {
                                 if(value==null||value.isEmpty){
                                   return '*required field';
@@ -291,15 +212,8 @@ class _UserRegisterationState extends State<UserRegisteration> {
                               controller: aadharController,
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 158.0),
-                            child: Text(
-                              'Phone no',
-                              style: TextStyle(fontSize: 20),
-                            ),
-                          ),
                           SizedBox(
-                            height: 3,
+                            height: 20,
                           ),
                           Container(
                             width: 250,
@@ -309,7 +223,7 @@ class _UserRegisterationState extends State<UserRegisteration> {
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.lightBlue.shade50),
                             child: TextFormField(
-                              decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
+                              decoration: InputDecoration(hintText: 'Phone no',border: UnderlineInputBorder(borderSide: BorderSide.none), contentPadding: EdgeInsets.only(left: 30.0),),
                               validator: (value) {
                                 if(value==null||value.isEmpty){
                                   return '*required field';
@@ -327,6 +241,7 @@ class _UserRegisterationState extends State<UserRegisteration> {
                             child: InkWell(
                               onTap: () {
                                 if (signupkey.currentState!.validate()) {
+
                                   backendServices.signup(
                                     emailController.text,
                                     passwordController.text,

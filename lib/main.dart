@@ -1,5 +1,6 @@
 import 'package:dmythra2/about_organization.dart';
 import 'package:dmythra2/academic.dart';
+import 'package:dmythra2/controller/splash_screen.dart';
 import 'package:dmythra2/firebase_options.dart';
 import 'package:dmythra2/org_acceptedrequest.dart';
 import 'package:dmythra2/activitypost.dart';
@@ -79,7 +80,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false ,
-      home: Startingpage(),
+      home: SplashScreenPage(),
     );
   }
 }

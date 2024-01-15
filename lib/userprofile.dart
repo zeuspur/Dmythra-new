@@ -1,4 +1,5 @@
 import 'package:dmythra2/authent.dart';
+import 'package:dmythra2/controller/check_login.dart';
 import 'package:dmythra2/loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -158,6 +159,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                               onPressed: () {
+                                setLoginPreferfalse();
                                 Navigator.of(context).pushAndRemoveUntil(
                                     MaterialPageRoute(
                                       builder: (context) => const loginpage(),

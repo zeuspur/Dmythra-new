@@ -20,17 +20,6 @@ class _UserLoginState extends State<UserLogin> {
   Widget build(BuildContext context) {
     BackendServices backendServices = BackendServices();
     return Scaffold(
-      // extendBodyBehindAppBar: true,
-      // appBar: AppBar(
-      //   automaticallyImplyLeading: true,
-      //   backgroundColor: Colors.transparent,
-      //   // Text('Counselling',style: TextStyle(fontSize: 45,fontWeight: FontWeight.w100),),
-      //   leading: IconButton(
-      //       onPressed: () {
-      //         Navigator.pop(context);
-      //       },
-      //       icon: Icon(Icons.arrow_back_ios)),
-      // ),
       body: Container(
         height: double.infinity,
         width: double.infinity,
@@ -60,15 +49,15 @@ class _UserLoginState extends State<UserLogin> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 168.0),
-                      child: Text(
-                        'Email ID',
-                        style: TextStyle(fontSize: 20),
-                        // style: TextStyle(
-                        //      fontSize: 20),
-                      ),
-                    ),
+                    // Padding(
+                    //   padding: const EdgeInsets.only(right: 168.0),
+                    //   child: Text(
+                    //     '',
+                    //     style: TextStyle(fontSize: 20),
+                    //     // style: TextStyle(
+                    //     //      fontSize: 20),
+                    //   ),
+                    // ),
                     SizedBox(
                       height: 5,
                     ),
@@ -80,7 +69,7 @@ class _UserLoginState extends State<UserLogin> {
                           borderRadius: BorderRadius.circular(20),
                           color: Colors.lightBlue.shade50),
                       child: TextFormField(
-                        decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
+                        decoration: InputDecoration( hintText: 'Email ID',border: UnderlineInputBorder(borderSide: BorderSide.none), contentPadding: EdgeInsets.only(left: 30.0),),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return '*required field';
@@ -98,15 +87,15 @@ class _UserLoginState extends State<UserLogin> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 158.0),
-                          child: Text(
-                            'Password',
-                            style: TextStyle(fontSize: 20),
-                            // style: TextStyle(
-                            //      fontSize: 20),
-                          ),
-                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.only(right: 158.0),
+                        //   child: Text(
+                        //     'Password',
+                        //     style: TextStyle(fontSize: 20),
+                        //     // style: TextStyle(
+                        //     //      fontSize: 20),
+                        //   ),
+                        // ),
                         Container(
                           width: 250,
                           height: 50,
@@ -114,20 +103,17 @@ class _UserLoginState extends State<UserLogin> {
                               border: Border.all(width: 2,color: Colors.grey),
                               borderRadius: BorderRadius.circular(20),
                               color: Colors.lightBlue.shade50),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TextFormField(
-                              decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return '*required field';
-                                } else {
-                                  return null;
-                                }
-                              },
-                              controller: passwordController,
-                              onTap: () {},
-                            ),
+                          child: TextFormField(
+                            decoration: InputDecoration( hintText: 'Password',border: UnderlineInputBorder(borderSide: BorderSide.none), contentPadding: EdgeInsets.only(left: 30.0),),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return '*required field';
+                              } else {
+                                return null;
+                              }
+                            },
+                            controller: passwordController,
+                            onTap: () {},
                           ),
                         ),
                         SizedBox(

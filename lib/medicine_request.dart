@@ -192,7 +192,14 @@ class _MedicineRequestState extends State<MedicineRequest> {
                                                 child: Row(
                                                   children: [
                                                     ElevatedButton(
-                                                        onPressed: () {},
+                                                        onPressed: ()async {
+                                                          await   backendServices.deleteRequest( backendServices.medicineList[index].description,  backendServices.medicineList[index].medicineid,).then((value){
+                                                            setState(() {
+
+                                                            });});
+
+
+                                                        },
                                                         child: Text(
                                                           "Reject",
                                                           style: TextStyle(
@@ -206,7 +213,13 @@ class _MedicineRequestState extends State<MedicineRequest> {
                                                                         .shade900))),
                                                     Spacer(),
                                                     ElevatedButton(
-                                                      onPressed: () {},
+                                                      onPressed: (){},
+
+                                                      // onPressed: ()async {
+                                                      //
+                                                      //
+                                                      //
+                                                      // },
                                                       child: Text(
                                                         "Accept",
                                                         style: TextStyle(
@@ -214,9 +227,10 @@ class _MedicineRequestState extends State<MedicineRequest> {
                                                                 Colors.white),
                                                       ),
                                                       style: ButtonStyle(
+
                                                           backgroundColor:
                                                               MaterialStatePropertyAll(
-                                                                  Colors.blue
+                                                                  Colors.grey
                                                                       .shade900)),
                                                     ),
                                                   ],

@@ -72,7 +72,7 @@ class _UserHomeState extends State<UserHome> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 40.0),
+                          padding: const EdgeInsets.only(bottom: 150),
                           child: Text(
                             'Home',
                             style: TextStyle(
@@ -81,7 +81,7 @@ class _UserHomeState extends State<UserHome> {
                           ),
                         ),
                         SizedBox(
-                          height: 30,
+                          height: 10,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

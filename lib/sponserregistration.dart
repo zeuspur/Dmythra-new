@@ -29,6 +29,18 @@ class _SponserRegistrationState extends State<SponserRegistration> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          centerTitle: true,
+          // title: Text(backendServices.userModel.username),
+          backgroundColor: Colors.transparent,
+          automaticallyImplyLeading: false,
+          leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Icon(Icons.arrow_back_ios)),
+        ),
         backgroundColor: Colors.transparent,
         body: Container(
             width: double.infinity,
@@ -41,41 +53,13 @@ class _SponserRegistrationState extends State<SponserRegistration> {
             child: Center(
               child: SingleChildScrollView(
                 child: Column(children: [
-                  Container(
-                    color: Colors.transparent,
-                    width: MediaQuery.of(context).size.width,
-                    height: 90,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 80),
-                          child: IconButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              icon: Icon(Icons.arrow_back_ios_new_rounded)),
-                        ),
-                      ],
-                    ),
-                  ),
                   Form(
                     key: signupkey,
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 208.0),
-                            child: SizedBox(
-                              height: 30,
-                              child: Text(
-                                'Name',
-                                style: TextStyle(fontSize: 20),
-                              ),
-                            ),
-                          ),
                           SizedBox(
-                            height: 3,
+                            height: 20,
                           ),
                           Container(
                             width: 280,
@@ -85,7 +69,7 @@ class _SponserRegistrationState extends State<SponserRegistration> {
                                 borderRadius: BorderRadius.circular(20),
                                 color: Colors.lightBlue.shade50),
                             child: TextFormField(
-                              decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
+                              decoration: InputDecoration(hintText: 'Name',border: UnderlineInputBorder(borderSide: BorderSide.none), contentPadding: EdgeInsets.only(left: 30.0),),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return '*required field';
@@ -97,17 +81,7 @@ class _SponserRegistrationState extends State<SponserRegistration> {
                             ),
                           ),
                           SizedBox(
-                            height: 15,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 158.0),
-                            child: Text(
-                              'Date of birth',
-                              style: TextStyle(fontSize: 20),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 3,
+                            height: 20,
                           ),
                           Container(
                             width: 280,
@@ -117,7 +91,7 @@ class _SponserRegistrationState extends State<SponserRegistration> {
                                 borderRadius: BorderRadius.circular(20),
                                 color: Colors.lightBlue.shade50),
                             child: TextFormField(
-                              decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
+                              decoration: InputDecoration(hintText: 'Date of birth',border: UnderlineInputBorder(borderSide: BorderSide.none), contentPadding: EdgeInsets.only(left: 30.0),),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return '*required field';
@@ -129,17 +103,7 @@ class _SponserRegistrationState extends State<SponserRegistration> {
                             ),
                           ),
                           SizedBox(
-                            height: 10,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 188.0),
-                            child: Text(
-                              'Email ID',
-                              style: TextStyle(fontSize: 20),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 3,
+                            height: 20,
                           ),
                           Container(
                             width: 280,
@@ -149,7 +113,7 @@ class _SponserRegistrationState extends State<SponserRegistration> {
                                 borderRadius: BorderRadius.circular(20),
                                 color: Colors.lightBlue.shade50),
                             child: TextFormField(
-                              decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
+                              decoration: InputDecoration(hintText: 'Email ID',border: UnderlineInputBorder(borderSide: BorderSide.none), contentPadding: EdgeInsets.only(left: 30.0),),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return '*required field';
@@ -161,17 +125,7 @@ class _SponserRegistrationState extends State<SponserRegistration> {
                             ),
                           ),
                           SizedBox(
-                            height: 10,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 188.0),
-                            child: Text(
-                              'Password',
-                              style: TextStyle(fontSize: 20),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5,
+                            height: 20,
                           ),
                           Container(
                             width: 280,
@@ -181,7 +135,7 @@ class _SponserRegistrationState extends State<SponserRegistration> {
                                 borderRadius: BorderRadius.circular(20),
                                 color: Colors.lightBlue.shade50),
                             child: TextFormField(
-                              decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
+                              decoration: InputDecoration(hintText: 'Password',border: UnderlineInputBorder(borderSide: BorderSide.none), contentPadding: EdgeInsets.only(left: 30.0),),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return '*required field';
@@ -193,17 +147,7 @@ class _SponserRegistrationState extends State<SponserRegistration> {
                             ),
                           ),
                           SizedBox(
-                            height: 10,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 185.0),
-                            child: Text(
-                              'Aadhar no',
-                              style: TextStyle(fontSize: 20),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 3,
+                            height: 20,
                           ),
                           Container(
                             width: 280,
@@ -213,7 +157,7 @@ class _SponserRegistrationState extends State<SponserRegistration> {
                                 borderRadius: BorderRadius.circular(20),
                                 color: Colors.lightBlue.shade50),
                             child: TextFormField(
-                              decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
+                              decoration: InputDecoration(hintText: 'Aadhar no',border: UnderlineInputBorder(borderSide: BorderSide.none), contentPadding: EdgeInsets.only(left: 30.0),),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return '*required field';
@@ -224,15 +168,8 @@ class _SponserRegistrationState extends State<SponserRegistration> {
                               controller: aadharController,
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 185.0),
-                            child: Text(
-                              'Phone no',
-                              style: TextStyle(fontSize: 20),
-                            ),
-                          ),
                           SizedBox(
-                            height: 3,
+                            height: 20,
                           ),
                           Container(
                             width: 280,
@@ -242,7 +179,7 @@ class _SponserRegistrationState extends State<SponserRegistration> {
                                 borderRadius: BorderRadius.circular(20),
                                 color: Colors.lightBlue.shade50),
                             child: TextFormField(
-                              decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
+                              decoration: InputDecoration(hintText: 'Phone no',border: UnderlineInputBorder(borderSide: BorderSide.none), contentPadding: EdgeInsets.only(left: 30.0),),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return '*required field';

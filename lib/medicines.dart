@@ -82,7 +82,7 @@ class _MedicinesState extends State<Medicines> {
                     },
                     controller: prescriptionController,
                     decoration: InputDecoration(
-                      hintText: 'What do you need?',
+                      // hintText: 'What do you need?',
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.only(left: 30.0),
                     ),
@@ -92,29 +92,29 @@ class _MedicinesState extends State<Medicines> {
               SizedBox(
                 height: 25,
               ),
-              Positioned(
-                bottom: 100.0,
-                left: 80.0,
-                child: Container(
-                  width: 140.0,
-                  height: 50.0,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 12.0, left: 48.0),
-                    child: Text(
-                      'Upload',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w100,
-                          fontSize: 20),
-                    ),
-                  ),
-                  decoration: BoxDecoration(
-                    // Define your desired decoration here
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.blue.shade900,
-                  ),
-                ),
-              ),
+              // Positioned(
+              //   bottom: 100.0,
+              //   left: 80.0,
+              //   child: Container(
+              //     width: 140.0,
+              //     height: 50.0,
+              //     child: Padding(
+              //       padding: const EdgeInsets.only(top: 12.0, left: 48.0),
+              //       child: Text(
+              //         'Upload',
+              //         style: TextStyle(
+              //             color: Colors.white,
+              //             fontWeight: FontWeight.w100,
+              //             fontSize: 20),
+              //       ),
+              //     ),
+              //     decoration: BoxDecoration(
+              //       // Define your desired decoration here
+              //       borderRadius: BorderRadius.circular(10),
+              //       color: Colors.blue.shade900,
+              //     ),
+              //   ),
+              // ),
               Padding(
                 padding: const EdgeInsets.only(right: 230.0),
                 child: Container(
@@ -148,36 +148,36 @@ class _MedicinesState extends State<Medicines> {
               SizedBox(
                 height: 6,
               ),
-              Padding(
-                padding: const EdgeInsets.only(right: 190.0),
-                child: Container(
-                  child: Text(
-                    'Description',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 3,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 11.0),
-                child: Container(
-                  width: 290,
-                  height: 50,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.lightBlue.shade50),
-                  child: TextFormField(
-                    controller: descriptionController,
-                    decoration: InputDecoration(
-                      hintText: 'What do you want?',
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.only(left: 30.0),
-                    ),
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(right: 190.0),
+              //   child: Container(
+              //     child: Text(
+              //       'Description',
+              //       style: TextStyle(fontSize: 20),
+              //     ),
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 3,
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.only(right: 11.0),
+              //   child: Container(
+              //     width: 290,
+              //     height: 50,
+              //     decoration: BoxDecoration(
+              //         borderRadius: BorderRadius.circular(10),
+              //         color: Colors.lightBlue.shade50),
+              //     child: TextFormField(
+              //       controller: descriptionController,
+              //       decoration: InputDecoration(
+              //         hintText: 'What do you want?',
+              //         border: InputBorder.none,
+              //         contentPadding: EdgeInsets.only(left: 30.0),
+              //       ),
+              //     ),
+              //   ),
+              // ),
               SizedBox(
                 height: 100,
               ),
@@ -189,7 +189,7 @@ class _MedicinesState extends State<Medicines> {
                  await   backendServices.saveMedicine(
                         prescriptionController.text,
                         int.parse(phoneController.text),
-                        descriptionController.text);
+                        "Medicine");
                  backendServices.uploadPrescription(backendServices.postPic!, descriptionController.text);
                  Navigator.of(context).pop();
                   },

@@ -206,7 +206,15 @@ class _ViewRequestState extends State<ViewRequest> {
                                                 child: Row(
                                                   children: [
                                                     ElevatedButton(
-                                                        onPressed: () {},
+                                                        onPressed: ()async {
+
+
+    await   backendServices.deleteRequest( backendServices.requestList[index]['helpType'],  backendServices.requestList[index]['helpid'],).then((value){
+    setState(() {
+
+    });});
+
+                                                        },
                                                         child: Text(
                                                           "Reject",
                                                           style: TextStyle(
@@ -220,7 +228,19 @@ class _ViewRequestState extends State<ViewRequest> {
                                                                         .shade900))),
                                                     Spacer(),
                                                     ElevatedButton(
-                                                      onPressed: () {},
+                                                      onPressed: () async{
+
+                                                       await   backendServices.acceptRequest( backendServices.requestList[index]['helpType'],  backendServices.requestList[index]['helpid'],).then((value){
+                                                         setState(() {
+
+                                                         });
+                                                       });
+
+
+
+
+
+                                                      },
                                                       child: Text(
                                                         "Accept",
                                                         style: TextStyle(

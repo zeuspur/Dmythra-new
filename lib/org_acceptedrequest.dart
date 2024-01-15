@@ -129,7 +129,7 @@ class _AcceptedRequestState extends State<AcceptedRequest> {
                                                             30),
                                                     color: Colors
                                                         .lightBlue.shade50),
-                                                child: TextField(),
+                                                child: Center(child: Text(backendServices.acceptedrequestList[index]["helpNumber"].toString()))
                                               ),
                                               Padding(
                                                 padding: const EdgeInsets.only(
@@ -159,7 +159,7 @@ class _AcceptedRequestState extends State<AcceptedRequest> {
                                                       const EdgeInsets.only(
                                                           left: 78, top: 10),
                                                   child: Text(
-                                                    'Medicines',
+                                                    backendServices.acceptedrequestList[index]["helpType"],
                                                     style:
                                                         TextStyle(fontSize: 20),
                                                   ),

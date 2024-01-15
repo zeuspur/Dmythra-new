@@ -54,15 +54,6 @@ class _OrganizationLoginState extends State<OrganizationLogin> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 160.0),
-                    child: Text(
-                      'Username',
-                      style: TextStyle(fontSize: 20),
-                      // style: TextStyle(
-                      //      fontSize: 20),
-                    ),
-                  ),
                   SizedBox(
                     height: 5,
                   ),
@@ -74,25 +65,16 @@ class _OrganizationLoginState extends State<OrganizationLogin> {
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.lightBlue.shade50),
                     child: TextFormField(
-                      decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
+                      decoration: InputDecoration(hintText: 'Email ID',border: UnderlineInputBorder(borderSide: BorderSide.none), contentPadding: EdgeInsets.only(left: 30.0),),
                       controller: username,
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 30,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 158.0),
-                        child: Text(
-                          'Password',
-                          style: TextStyle(fontSize: 20),
-                          // style: TextStyle(
-                          //      fontSize: 20),
-                        ),
-                      ),
                       Container(
                         width: 250,
                         height: 50,
@@ -100,21 +82,15 @@ class _OrganizationLoginState extends State<OrganizationLogin> {
                             border: Border.all(width: 2,color: Colors.grey),
                             borderRadius: BorderRadius.circular(20),
                             color: Colors.lightBlue.shade50),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextFormField(
-                            decoration: InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
-                            controller: password,
-                          ),
+                        child: TextFormField(
+                          decoration: InputDecoration( hintText: 'Password',border: UnderlineInputBorder(borderSide: BorderSide.none), contentPadding: EdgeInsets.only(left: 30.0),),
+                          controller: password,
                         ),
-                      ),
-                      SizedBox(
-                        height: 10,
                       ),
                     ],
                   ),
                   SizedBox(
-                    height: 40,
+                    height: 60,
                   ),
                   Center(
                     child: InkWell(

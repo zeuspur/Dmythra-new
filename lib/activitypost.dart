@@ -31,71 +31,62 @@ class _ActivityPostState extends State<ActivityPost> {
             },
             icon: Icon(Icons.arrow_back_ios)),
       ),
-      body: Stack(
-        children: [
-          Container(
-            height: 180,
-            width: double.infinity,
-            color: Colors.transparent,
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 90.0),
-                  child: Text('Activity', style: TextStyle(fontSize: 30)),
-                ),
-              ],
-            ),
-          ),
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 500.0, left: 35.0),
-              child: Text(
-                'Feed',
-                style: TextStyle(fontSize: 20),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              height: 180,
+              width: double.infinity,
+              // color: Colors.red,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 90.0),
+                    child: Text('Activity', style: TextStyle(fontSize: 30)),
+                  ),
+                ],
               ),
             ),
-          ),
-          Positioned(
-            bottom: 130.0,
-            left: 20.0,
-            child: InkWell(
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Padding(
+                padding: const EdgeInsets.only( left: 35.0),
+                child: Text(
+                  'Feed',
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+            ),
+            InkWell(
               onTap: () async {
                 await backendServices.selectPostPic(context);
                 setState(() {});
               },
               child: Container(
-                height: 500,
+                height: 200,
                 width: 320,
                 decoration: BoxDecoration(
                   image: DecorationImage(
+                    fit: BoxFit.fill,
                     image: backendServices.postPic == null
-                        ? AssetImage('assets/sponge.png')
+                        ? AssetImage('assets/add.png')
                         : FileImage(backendServices.postPic!) as ImageProvider,
                   ),
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
             ),
-          ),
-          Positioned(
-            bottom: 50.0,
-            left: 20.0,
-            child: Align(
+            Align(
               alignment: Alignment.bottomLeft,
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 180.0, left: 18.0),
+                padding: const EdgeInsets.only( left: 18.0),
                 child: Text(
                   'Bio',
                   style: TextStyle(fontSize: 20),
                 ),
               ),
             ),
-          ),
-          Positioned(
-            bottom: 180.0,
-            left: 30.0,
-            child: Container(
+            Container(
               width: 300.0,
               height: 50.0,
               decoration: BoxDecoration(
@@ -112,11 +103,8 @@ class _ActivityPostState extends State<ActivityPost> {
                 ),
               ),
             ),
-          ),
-          Positioned(
-            bottom: 100.0,
-            left: 80.0,
-            child: InkWell(
+            SizedBox(height: 20,),
+            InkWell(
               onTap: () async {
                 // await backendServices.fetchUserData();
                 await backendServices.savePost(backendServices.postPic!.path,
@@ -145,8 +133,8 @@ class _ActivityPostState extends State<ActivityPost> {
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

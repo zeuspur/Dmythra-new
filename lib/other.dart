@@ -49,36 +49,36 @@ class _OtherState extends State<Other> {
                 height: 160,
                 width: double.infinity,
               ),
-              Padding(
-                padding: const EdgeInsets.only(right: 220.0),
-                child: Container(
-                  child: Text(
-                    'Ask me...',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 3,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 11.0),
-                child: Container(
-                  width: 290,
-                  height: 50,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.lightBlue.shade50),
-                  child: TextFormField(
-                    controller: helptypeController,
-                    decoration: InputDecoration(
-                      hintText: 'What do you need?',
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.only(left: 30.0),
-                    ),
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(right: 220.0),
+              //   child: Container(
+              //     child: Text(
+              //       'Ask me...',
+              //       style: TextStyle(fontSize: 20),
+              //     ),
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 3,
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.only(right: 11.0),
+              //   child: Container(
+              //     width: 290,
+              //     height: 50,
+              //     decoration: BoxDecoration(
+              //         borderRadius: BorderRadius.circular(10),
+              //         color: Colors.lightBlue.shade50),
+              //     child: TextFormField(
+              //       controller: helptypeController,
+              //       decoration: InputDecoration(
+              //         hintText: 'What do you need?',
+              //         border: InputBorder.none,
+              //         contentPadding: EdgeInsets.only(left: 30.0),
+              //       ),
+              //     ),
+              //   ),
+              // ),
               SizedBox(
                 height: 10,
               ),
@@ -122,7 +122,7 @@ class _OtherState extends State<Other> {
                   onTap: (){
                     backendServices.saveHelp(
                         'Other Help',
-                        helptypeController.text,
+                        "Other",
                         int.parse(helpNumberController.text)).then((value) => Navigator.of(context).pop());
                   },
                   child: Container(

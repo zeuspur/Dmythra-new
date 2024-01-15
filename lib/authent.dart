@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dmythra2/controller/check_login.dart';
 import 'package:dmythra2/model/help_model.dart';
 import 'package:dmythra2/model/media_model.dart';
 import 'package:dmythra2/model/medicine_model.dart';
@@ -56,7 +57,7 @@ class BackendServices {
         .doc(userID)
         .set(_userModel!.toMap());
   }
-
+////////
   Future<void> signup(
     emailAddress,
     password,
@@ -117,6 +118,12 @@ class BackendServices {
             firebaseFirestore.collection(collectionName);
         var userQuery = await collection.doc(user.uid).get();
         if (userQuery.exists) {
+        if(collectionName=="sponsors"){
+          setLoginPrefertrue("SPONSOR");
+        }else if(collectionName=="users"){
+          setLoginPrefertrue("USER");
+        }
+
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
                 builder: (context) => pageName,
@@ -638,6 +645,7 @@ class BackendServices {
         bool isAccepted = doc['isAccepted'];
 
         medicines = MedicineModel(
+          medicineid: medicineid,
           prescription: prescription,
           phone: phone,
           description: description,
@@ -658,6 +666,7 @@ class BackendServices {
     context,
   ) {
     if (id == orgID && pass == orgpass) {
+      setLoginPrefertrue("ORGA");
       Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => OrganizationHome(),
       ));
@@ -712,4 +721,62 @@ class BackendServices {
       print('Error deleting user: $e');
     }
   }
+ //-----------------------------------------------------------------
+ acceptRequest(type,selectedId)async {
+   final db = FirebaseFirestore.instance;
+   if (type == "Food") {
+     await db.collection("Food Help").doc(selectedId).update(
+         {"isAccepted": true});
+   } else if (type == "Fund") {
+     await db.collection("Fund Help").doc(selectedId).update(
+         {"isAccepted": true});
+
+   } else if (type == "Clothes") {
+     await db.collection("Clothes Help").doc(selectedId).update(
+         {"isAccepted": true});
+
+   } else if (type == "Transportation") {
+     await db.collection("Transportation Help").doc(selectedId).update(
+         {"isAccepted": true});
+
+   } else if (type == "Other") {
+     await db.collection("Other Help").doc(selectedId).update(
+         {"isAccepted": true});
+
+   }else if(type=="Medicine"){
+     await db.collection("medicine Help").doc(selectedId).update(
+         {"isAccepted": true});
+
+   }
+
+}
+  deleteRequest(type,selectedId)async {
+    final db = FirebaseFirestore.instance;
+    if (type == "Food") {
+      await db.collection("Food Help").doc(selectedId).delete();
+    } else if (type == "Fund") {
+      await db.collection("Fund Help").doc(selectedId).delete();
+
+    } else if (type == "Clothes") {
+      await db.collection("Clothes Help").doc(selectedId).delete();
+
+    } else if (type == "Transportation") {
+      await db.collection("Transportation Help").doc(selectedId).delete();
+
+    } else if (type == "Other") {
+      await db.collection("Other Help").doc(selectedId).delete();
+
+    }else if(type=="Medicine"){
+      await db.collection("medicine help").doc(selectedId).delete();
+
+    }
+
+  }
+  //--------------------------------------------------------all sponser and user
+  addtoUserss(userId,type,email)async{
+    final db = FirebaseFirestore.instance;
+   await db.collection("All User").doc().set({"id":userId,"type":type,"email":email});
+
+  }
+
 }
