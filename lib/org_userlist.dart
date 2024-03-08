@@ -90,7 +90,7 @@ class _Organization_UserListState extends State<Organization_UserList> {
                                 return Column(
                                   children: [
                                     Container(
-                                      // height: 200,
+                                       height: 250,
                                       width: 300,
                                       decoration: BoxDecoration(
                                           color: Colors.grey.shade300,
@@ -109,15 +109,6 @@ class _Organization_UserListState extends State<Organization_UserList> {
                                                     .only(
                                                     top: 8.0,
                                                     left: 18.0),
-                                                child: Container(
-                                                  width: 50,
-                                                  height: 50,
-                                                  child: CircleAvatar(
-                                                    backgroundImage:
-                                                    AssetImage(
-                                                        "assets/Ellipse 10.png"),
-                                                  ),
-                                                ),
                                               ),
                                               Container(
                                                 child: Padding(
@@ -127,7 +118,7 @@ class _Organization_UserListState extends State<Organization_UserList> {
                                                       left: 8,
                                                       top: 14),
                                                   child: Text(
-                                                    backendServices.usersList[index].username,
+                                                   'Name:${backendServices.usersList[index].username}',
                                                     style: TextStyle(
                                                         fontSize: 24),
                                                   ),

@@ -16,7 +16,7 @@ class _MedicineRequestState extends State<MedicineRequest> {
     return Scaffold(
         bottomNavigationBar: Container(
           height: 70,
-          width: double.infinity,
+          width: 100,
           child: ElevatedButton(
             onPressed: () {
               Navigator.push(
@@ -30,7 +30,7 @@ class _MedicineRequestState extends State<MedicineRequest> {
                 backgroundColor:
                     MaterialStatePropertyAll(Colors.blue.shade900)),
             child: Text("Accepted Requests",
-                style: TextStyle(color: Colors.white)),
+                style: TextStyle(fontSize: 20,color: Colors.white)),
           ),
         ),
         extendBodyBehindAppBar: true,
@@ -58,7 +58,7 @@ class _MedicineRequestState extends State<MedicineRequest> {
             Padding(
               padding: const EdgeInsets.only(top: 75.0, left: 20.0),
               child: Text(
-                'All Request',
+                'Medicine Request',
                 style: TextStyle(
                   fontSize: 38,
                 ),

@@ -273,6 +273,56 @@ class BackendServices {
       print('Fetching user failed : $e');
     }
   }
+  acceptRequest(type,selectedId)async {
+    final db = FirebaseFirestore.instance;
+    if (type == "Food") {
+      await db.collection("Food Help").doc(selectedId).update(
+          {"isAccepted": true});
+    } else if (type == "Fund") {
+      await db.collection("Fund Help").doc(selectedId).update(
+          {"isAccepted": true});
+
+    } else if (type == "Clothes") {
+      await db.collection("Clothes Help").doc(selectedId).update(
+          {"isAccepted": true});
+
+    } else if (type == "Transportation") {
+      await db.collection("Transportation Help").doc(selectedId).update(
+          {"isAccepted": true});
+
+    } else if (type == "Other") {
+      await db.collection("Other Help").doc(selectedId).update(
+          {"isAccepted": true});
+
+    }else if(type=="Medicine"){
+      await db.collection("medicine Help").doc(selectedId).update(
+          {"isAccepted": true});
+
+    }
+
+  }
+  deleteRequest(type,selectedId)async {
+    final db = FirebaseFirestore.instance;
+    if (type == "Food") {
+      await db.collection("Food Help").doc(selectedId).delete();
+    } else if (type == "Fund") {
+      await db.collection("Fund Help").doc(selectedId).delete();
+
+    } else if (type == "Clothes") {
+      await db.collection("Clothes Help").doc(selectedId).delete();
+
+    } else if (type == "Transportation") {
+      await db.collection("Transportation Help").doc(selectedId).delete();
+
+    } else if (type == "Other") {
+      await db.collection("Other Help").doc(selectedId).delete();
+
+    }else if(type=="Medicine"){
+      await db.collection("medicine help").doc(selectedId).delete();
+
+    }
+
+  }
 
   //-------------------------Activity(post)------------------------------------
 
@@ -722,7 +772,7 @@ class BackendServices {
     }
   }
  //-----------------------------------------------------------------
- acceptRequest(type,selectedId)async {
+ sponsoracceptRequest(type,selectedId)async {
    final db = FirebaseFirestore.instance;
    if (type == "Food") {
      await db.collection("Food Help").doc(selectedId).update(
@@ -750,7 +800,7 @@ class BackendServices {
    }
 
 }
-  deleteRequest(type,selectedId)async {
+  sponsordeleteRequest(type,selectedId)async {
     final db = FirebaseFirestore.instance;
     if (type == "Food") {
       await db.collection("Food Help").doc(selectedId).delete();

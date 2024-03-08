@@ -113,7 +113,7 @@ class _AcceptedRequestState extends State<AcceptedRequest> {
                                                 padding: const EdgeInsets.only(
                                                     right: 180.0),
                                                 child: Text(
-                                                  'UD ID',
+                                                  'Phone',
                                                   style:
                                                       TextStyle(fontSize: 20),
                                                   // style: TextStyle(

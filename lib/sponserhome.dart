@@ -1,6 +1,7 @@
 
 import 'package:dmythra2/authent.dart';
 import 'package:dmythra2/sponsor_managerequest.dart';
+import 'package:dmythra2/sponsor_payment.dart';
 import 'package:dmythra2/sponsor_viewactivities.dart';
 import 'package:flutter/material.dart';
 import 'package:dmythra2/sponsor_profile.dart';
@@ -129,7 +130,35 @@ class _SponsorHomeState extends State<SponsorHome> {
                 ),
               ],
             ),
-            SizedBox(height: 50,
+            // SizedBox(height: 50,
+            // ),
+            SizedBox(
+              height: 50,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                InkWell(onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => SponsorPayment(),),);
+                },
+                  child: Container(
+                    height: 110,
+                    width: 160,
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 9.0),
+                        child: Text(
+                          'Donate',
+                          style: TextStyle(color: Colors.white, fontSize: 24),
+                        ),
+                      ),
+                    ),
+                    decoration: BoxDecoration(
+                        color: Colors.blue.shade900,
+                        borderRadius: BorderRadius.circular(20)),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

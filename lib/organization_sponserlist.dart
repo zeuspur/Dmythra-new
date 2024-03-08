@@ -14,6 +14,7 @@ class _Organization_SponserListState extends State<Organization_SponserList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         automaticallyImplyLeading: true,
@@ -91,7 +92,7 @@ class _Organization_SponserListState extends State<Organization_SponserList> {
                                         return Column(
                                           children: [
                                             Container(
-                                              // height: 200,
+                                              height: 200,
                                               width: 300,
                                               decoration: BoxDecoration(
                                                   color: Colors.grey.shade300,
@@ -110,15 +111,6 @@ class _Organization_SponserListState extends State<Organization_SponserList> {
                                                                     .only(
                                                                 top: 8.0,
                                                                 left: 18.0),
-                                                        child: Container(
-                                                          width: 50,
-                                                          height: 50,
-                                                          child: CircleAvatar(
-                                                            backgroundImage:
-                                                                AssetImage(
-                                                                    "assets/Ellipse 10.png"),
-                                                          ),
-                                                        ),
                                                       ),
                                                       Container(
                                                         child: Padding(
@@ -128,7 +120,7 @@ class _Organization_SponserListState extends State<Organization_SponserList> {
                                                                   left: 8,
                                                                   top: 14),
                                                           child: Text(
-                                                            backendServices.sponsorsList[index].sponsorname,
+                                                            'Name:${backendServices.sponsorsList[index].sponsorname}',
                                                             style: TextStyle(
                                                                 fontSize: 24),
                                                           ),
@@ -225,6 +217,7 @@ class _Organization_SponserListState extends State<Organization_SponserList> {
                 )
               ]),
             ),
+
           )),
     );
   }

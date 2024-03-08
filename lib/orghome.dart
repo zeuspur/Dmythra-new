@@ -185,9 +185,33 @@ class _OrganizationHomeState extends State<OrganizationHome> {
                         color: Colors.blue.shade900,
                         borderRadius: BorderRadius.circular(20)),
                   ),
-                )
+                ),
+
               ],
             ),
+            SizedBox(
+              height: 50,
+            ),
+            InkWell(onTap: () {
+
+            },
+              child: Container(
+                height: 100,
+                width: 150,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 3.0),
+                    child: Text(
+                      'Messages',
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                  ),
+                ),
+                decoration: BoxDecoration(
+                    color: Colors.blue.shade900,
+                    borderRadius: BorderRadius.circular(20)),
+              ),
+            )
           ],
         ),
       ),

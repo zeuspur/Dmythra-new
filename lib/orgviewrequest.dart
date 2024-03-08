@@ -18,8 +18,10 @@ class _ViewRequestState extends State<ViewRequest> {
         bottomNavigationBar: Container(
           height: 70,
           width: double.infinity,
-          child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
@@ -34,13 +36,14 @@ class _ViewRequestState extends State<ViewRequest> {
                         MaterialStatePropertyAll(Colors.blue.shade900)),
                 child: Text("Medicine Requests",
                     style: TextStyle(color: Colors.white)),
-              ),Expanded(
+              ),
+              Expanded(
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>AcceptedRequest (),
+                        builder: (context) => AcceptedRequest(),
                       ),
                     );
                   },
@@ -157,16 +160,21 @@ class _ViewRequestState extends State<ViewRequest> {
                                                 ),
                                               ),
                                               Container(
-                                                width: 250,
-                                                height: 50,
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30),
-                                                    color: Colors
-                                                        .lightBlue.shade50),
-                                                child: Center(child: Text(backendServices.requestList[index]['helpNumber'].toString()))
-                                              ),
+                                                  width: 250,
+                                                  height: 50,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              30),
+                                                      color: Colors
+                                                          .lightBlue.shade50),
+                                                  child: Center(
+                                                      child: Text(
+                                                          backendServices
+                                                              .requestList[
+                                                                  index]
+                                                                  ['helpNumber']
+                                                              .toString()))),
                                               Padding(
                                                 padding: const EdgeInsets.only(
                                                     right: 170.0),
@@ -192,7 +200,9 @@ class _ViewRequestState extends State<ViewRequest> {
                                                       const EdgeInsets.only(
                                                           left: 78, top: 10),
                                                   child: Text(
-                                                    backendServices.requestList[index]['helpType'],
+                                                    backendServices
+                                                            .requestList[index]
+                                                        ['helpType'],
                                                     style:
                                                         TextStyle(fontSize: 20),
                                                   ),
@@ -206,14 +216,19 @@ class _ViewRequestState extends State<ViewRequest> {
                                                 child: Row(
                                                   children: [
                                                     ElevatedButton(
-                                                        onPressed: ()async {
-
-
-    await   backendServices.deleteRequest( backendServices.requestList[index]['helpType'],  backendServices.requestList[index]['helpid'],).then((value){
-    setState(() {
-
-    });});
-
+                                                        onPressed: () async {
+                                                          await backendServices
+                                                              .deleteRequest(
+                                                            backendServices
+                                                                    .requestList[
+                                                                index]['helpType'],
+                                                            backendServices
+                                                                    .requestList[
+                                                                index]['helpid'],
+                                                          )
+                                                              .then((value) {
+                                                            setState(() {});
+                                                          });
                                                         },
                                                         child: Text(
                                                           "Reject",
@@ -228,18 +243,19 @@ class _ViewRequestState extends State<ViewRequest> {
                                                                         .shade900))),
                                                     Spacer(),
                                                     ElevatedButton(
-                                                      onPressed: () async{
-
-                                                       await   backendServices.acceptRequest( backendServices.requestList[index]['helpType'],  backendServices.requestList[index]['helpid'],).then((value){
-                                                         setState(() {
-
-                                                         });
-                                                       });
-
-
-
-
-
+                                                      onPressed: () async {
+                                                        await backendServices
+                                                            .acceptRequest(
+                                                          backendServices
+                                                                  .requestList[
+                                                              index]['helpType'],
+                                                          backendServices
+                                                                  .requestList[
+                                                              index]['helpid'],
+                                                        )
+                                                            .then((value) {
+                                                          setState(() {});
+                                                        });
                                                       },
                                                       child: Text(
                                                         "Accept",
